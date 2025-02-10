@@ -1,30 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
+    <title>Manga+</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dystopia-App</title>
+    <meta name="description" content="A web 3.0 webcomic manga series. manga plus shonen jump manga">
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" sizes="180x180" href="icon-180x180.png">
 
+
+
+    <!-- SEO optimisation for google and older search engines-->
+    <!-- Open Graph (Facebook, LinkedIn) -->
+    <meta name="keywords"
+        content="Dystopia App, manga, cyberpunk, webcomic, dystopian, sci-fi, adventure, anime, cartoon">
+    <meta property="og:title" content="Dystopia App - Cyberpunk Manga">
+    <meta property="og:description" content="A thrilling cyberpunk webcomic about survival in a dystopian world.">
+    <meta property="og:image" content="assets/manga/dystopia_app/icon_2.png">
+    <meta property="og:url" content="https://inhumanity-arts.itch.io/dystopia-app">
+
+    <!-- Twitter Card SEO -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Dystopia App - Cyberpunk Manga">
+    <meta name="twitter:description" content="Read the latest chapters of Dystopia App, a cyberpunk adventure.">
+    <meta name="twitter:image" content="assets/dystopia-cover.jpg">
+
+    <!-- Ads Links
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3900377589557710"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script> -->
 </head>
+
 
 <body>
     <header>
-        <h1>Dystopia App Manga</h1>
-    </header>
+        <!-- Header -->
+        <h1 onclick="renderMangaList()" style="cursor: pointer;">Manga+</h1>
 
+        <nav>
+            <ul class="header-nav">
+                <li><a href="#">Merch</a></li>
+                <li><a href="#">Games</a></li>
+                <li><a href="#">Art & Toons</a></li>
+                <li><a href="#">Characters</a></li>
+                <li><a href="#">Whitepaper</a></li>
+
+            </ul>
+
+
+        </nav>
+
+        <div class="carousel">
+            <div class="carousel-track">
+                <img src="assets/manga/dystopia_app/cover/title-art_2.png" alt="Manga 1">
+                <img src="assets/manga/dystopia_app/cover/R9_00024.png" alt="Manga 2">
+                <img src="assets/manga/dystopia_app/cover/Dystopia Logo.png" alt="Manga 3">
+
+            </div>
+        </div>
+
+    </header>
+    <!-- All Rendered Element In This Website-->
+    <!-- Hidden And Shown via innerhtml and css style changes-->
     <main class="container">
+        <div>
+            <h2>Latest Updates</h2>
+        </div>
         <div id="mangaList"></div>
         <div id="chapterList" style="display:none;"></div>
         <div id="mangaReader" style="display:none;"></div>
-        <section id="featuredGame">
-            <iframe frameborder="0" src="https://itch.io/embed/828514" width="552" height="167">
-                <a href="https://inhumanity-arts.itch.io/dystopia-app">Dystopia App by Inhumanity studios</a>
-            </iframe>
-        </section>
+
+        <div id="Characters" style="display:none;"></div>
+        <div id="Games" style="display:none;"></div>
+        <div id="Whitepaper" style="display:none;"></div>
 
     </main>
 
