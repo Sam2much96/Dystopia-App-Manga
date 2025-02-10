@@ -72,7 +72,7 @@ const mangaCollection = [
             },
             {
                 number: 2,
-                title: "Kpo Kop (Police)",
+                title: "Police",
                 pages: [
                     "assets/manga/dystopia_app/chap2/cover page.webp",
                     "assets/manga/dystopia_app/chap2/cover 2.webp",
@@ -98,27 +98,48 @@ const mangaCollection = [
                     "assets/manga/dystopia_app/chap2/Pg 20.webp",
                     "assets/manga/dystopia_app/chap2/Pg 21.webp",
                 ]
+            },
+            {
+                number: 3,
+                title: "Neo Sud",
+                pages: [
+                    "assets/manga/dystopia_app/chap3/Cover 1.webp",
+                    "assets/manga/dystopia_app/chap3/pg 1.webp",
+                    "assets/manga/dystopia_app/chap3/pg 2.webp",
+                    "assets/manga/dystopia_app/chap3/pg 3.webp",
+                    "assets/manga/dystopia_app/chap3/pg 4.webp",
+                    "assets/manga/dystopia_app/chap3/pg 5.webp",
+                    "assets/manga/dystopia_app/chap3/pg 6.webp",
+
+                ]
+
             }
         ],
-        genre: ["Fantasy", "Adventure", "Videogame"],
+        genre: ["Fantasy", "Action", "Videogame"],
         likes: 342
     },
     {
         id: 2,
-        title: "Cyber Pulse",
-        description: "A futuristic cyberpunk thriller in a neon-lit metropolis.",
-        coverImage: "https://i.imgur.com/ABC456.jpg",
+        title: "Freedom King",
+        description: "A comedy slice of life series about a group of wacky college friends.",
+        coverImage: "assets/manga/freedom king/coverart.png",
         chapters: [
             {
                 number: 1,
                 title: "Digital Frontier",
                 pages: [
-                    "https://i.imgur.com/cyberpage1.jpg",
-                    "https://i.imgur.com/cyberpage2.jpg"
+                    "assets/manga/freedom king/ep3.jpg",
+                ]
+            },
+            {
+                number: 2,
+                title: "Care To Share",
+                pages: [
+                    "assets/manga/freedom king/ep2.jpg",
                 ]
             }
         ],
-        genre: ["Sci-Fi", "Cyberpunk"],
+        genre: ["Slice of Life", "Comedy"],
         likes: 512
     }
 ];
@@ -143,13 +164,12 @@ let currentChapter = null;
 let currentPageIndex = 0;
 
 
-function visibility(layer) {
-    /**
-     * Toggles Visibility On /Off Each Dom Element
-     */
 
-
-}
+/*
+*  
+* Toggles Visibility On /Off Each Dom Element
+* 
+*/
 
 function setCarouselVisibility(isVisible) {
     // toggles the visibility of the carousel
@@ -160,6 +180,37 @@ function setCarouselVisibility(isVisible) {
     }
 }
 
+function setMangaListVisibility(isVisible) {
+    // toggles the visibility of the manga list
+    if (isVisible == true) {
+        mangaList.classList.remove("hidden"); // Show the carousel
+    } else {
+        mangaList.classList.add("hidden"); // Hide the carousel
+    }
+}
+
+
+function setChapterListVisibility(isVisible) {
+    // toggles the visibility of the chapter list
+    if (isVisible == true) {
+        chapterList.classList.remove("hidden"); // Show the carousel
+    } else {
+        chapterList.classList.add("hidden"); // Hide the carousel
+    }
+}
+
+function setMangaReaderVisibility(isVisible) {
+    // toggles the visibility of the manga reader
+    if (isVisible == true) {
+        mangaReader.classList.remove("hidden"); // Show the carousel
+    } else {
+        mangaReader.classList.add("hidden"); // Hide the carousel
+    }
+}
+
+
+
+
 
 // Home Screen
 // Render Manga List by modifying the Manga List Div in the Dom
@@ -168,11 +219,12 @@ function renderMangaList() {
 
     mangaList.innerHTML = '';
 
-    // Turn of chapter list & Manga Renders via css
-    // set Manga list display to empty string
-    mangaList.style.display = "";
-    chapterList.style.display = 'none';
-    mangaReader.style.display = 'none';
+    // Turn of chapter list & Manga Renders via css + js
+
+
+    setMangaListVisibility(true);
+    setChapterListVisibility(false);
+    setMangaReaderVisibility(false);
 
     setCarouselVisibility(true);
 
@@ -199,6 +251,13 @@ function renderMangaList() {
 }
 
 // Show Chapters for a Manga
+// TO DO:
+// (1) Drag & Drop
+// (2) Panel View
+// (3) Music
+// (4) Animated Gif Pages
+// (5) Pinch to zoom (Mobile)
+
 function showChapters(manga) {
     //console.log("Show Chapters");
 
@@ -206,8 +265,11 @@ function showChapters(manga) {
 
     //turn off image carousel
     setCarouselVisibility(false);
+    setMangaListVisibility(false);
+    setChapterListVisibility(true);
+    setMangaReaderVisibility(false);
 
-    mangaList.style.display = 'none'; // hide the mangaList page via css scripting
+    //mangaList.style.display = 'none'; // hide the mangaList page via css scripting
     chapterList.style.display = 'block'; // change the styling of the website to full screen
 
     // create Button to go back to homescreen/ render Manga List
@@ -230,7 +292,12 @@ function showReader(chapterNumber) {
     currentPageIndex = 0;
 
     // hide the chapter list 
-    chapterList.style.display = 'none';
+    //chapterList.style.display = 'none';
+    setCarouselVisibility(false);
+    setMangaListVisibility(false);
+    setChapterListVisibility(false);
+    setMangaReaderVisibility(true);
+
 
     // make the manga reader full screen
     mangaReader.style.display = 'block';
@@ -260,6 +327,27 @@ function renderPage() {
                     Page ${currentPageIndex + 1} of ${currentChapter.pages.length}
                 </div>
             `;
+
+
+    // Add double-click zoom functionality
+    // using css scale transfrom
+    const readerImage = document.getElementById("readerImage");
+    let isZoomed = false;
+
+    readerImage.addEventListener("dblclick", () => {
+        isZoomed = !isZoomed;
+        if (isZoomed) {
+            readerImage.style.transform = "scale(2)";  // Zoom in
+            readerImage.style.cursor = "zoom-out";
+        } else {
+            readerImage.style.transform = "scale(1)";  // Reset to normal
+            readerImage.style.cursor = "zoom-in";
+        }
+    });
+
+    // Apply CSS for smooth zoom effect
+    readerImage.style.transition = "transform 0.3s ease";
+    readerImage.style.cursor = "zoom-in";  // Initial cursor state
 }
 
 // Page Navigation
@@ -277,7 +365,20 @@ function prevPage() {
     }
 }
 
+//double tap to zoom in / out
 
 
-// Load Langind Page
+//Navigation UI settings
+
+function onGamesClick() {
+
+    console.log("Games Nav Clicked")
+}
+
+function onWhitePaperClicked() {
+    console.log("White Paper Clicked");
+}
+
+
+// Load Landing Page
 renderMangaList();

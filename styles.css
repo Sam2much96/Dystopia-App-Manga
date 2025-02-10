@@ -25,11 +25,76 @@ body {
 }
 
 header {
-    background-color: var(--primary-color);
+    background-color: #575757;
     color: white;
-    text-align: center;
-    padding: 1rem;
+    padding: 15px 20px;
+    padding-bottom: 10px;
+    /* Spacing below navigation */
+    display: flex;
+    flex-direction: column;
+    /* Ensures items stack vertically */
+    text-align: left;
+    justify-content: space-between;
+    align-items: center;
 }
+
+.header-nav {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin-top: 0;
+}
+
+.header-nav li {
+    margin-left: 20px;
+}
+
+.header-nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.header-nav a:hover {
+    color: #f39c12;
+}
+
+
+.carousel {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+}
+
+.carousel-track {
+    display: flex;
+    animation: scroll 10s linear infinite;
+}
+
+.carousel img {
+    width: auto;
+    height: 220px;
+    margin-right: 10px;
+    border-radius: 10px;
+}
+
+@keyframes scroll {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+.hidden {
+    display: none !important;
+}
+
 
 #mangaList {
     display: grid;
@@ -105,7 +170,7 @@ header {
 }
 
 .btn:hover {
-    background-color: #1e40af;
+    background-color: #f39c12;
 }
 
 #pageIndicator {
