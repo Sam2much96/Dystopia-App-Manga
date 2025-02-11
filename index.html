@@ -3,7 +3,7 @@
 
 
 <head>
-    <title>Manga+</title>
+    <title>Manga++</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A web 3.0 webcomic manga series. manga plus shonen jump manga">
@@ -27,6 +27,8 @@
     <meta name="twitter:description" content="Read the latest chapters of Dystopia App, a cyberpunk adventure.">
     <meta name="twitter:image" content="assets/dystopia-cover.jpg">
 
+
+
     <!-- Ads Links-->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3900377589557710"
         crossorigin="anonymous"></script>
@@ -36,27 +38,33 @@
 <body>
     <header>
         <!-- Header -->
-        <h1 onclick="renderMangaList()" style="cursor: pointer;">Manga+</h1>
+        <h1 onclick="renderMangaList()" style="cursor: pointer;">Manga++</h1>
 
-        <!-- 
+
         <nav>
+            <!-- Navigation Bar -->
             <ul class="header-nav">
-                <li><a href="#">Games</a></li>
-                <li><a href="#">Characters</a></li>
-                <li><a href="#">Whitepaper</a></li>
+                <li><a href="#" onclick="renderGamesList()">Games</a></li>
+                <li><a href="#" onclick="renderMangaList()">Comics</a></li>
+                <li><a href="#" onclick="renderWhitePaperRoadMap()">Whitepaper</a></li>
 
             </ul>
 
 
         </nav>
--->
+
         <!-- Carousel Slider -->
+        <!-- TO DO: 
+            (1) Optimize image size / quality
+            (2) Debug Platform and Bandwidth speed to optimize loads
+            (3) Load Carousel with JS
+        -->
         <div class="carousel">
             <div class="carousel-track">
-                <img src="assets/manga/dystopia_app/cover/title-art_2.png" alt="Manga 1">
-                <img src="assets/manga/dystopia_app/cover/R9_00024.png" alt="Manga 2">
+                <img src="assets/manga/dystopia_app/cover/title-art_2.webp" alt="Manga 1">
+                <img src="assets/manga/dystopia_app/cover/R9_00024.webp" alt="Manga 2">
                 <img src="assets/manga/dystopia_app/cover/concept_art_2.jpg" alt="Manga 4">
-                <img src="assets/manga/dystopia_app/cover/raw 3 Dystopia Bckgrnd-1.jpg" alt="Manga 7">
+                <img src="assets/manga/dystopia_app/cover/raw 3 Dystopia Bckgrnd-1.webp" alt="Manga 7">
                 <img src="assets/manga/dystopia_app/cover/preview image 0007.jpg" alt="Manga 8">
                 <img src="assets/manga/dystopia_app/cover/Background 004.jpg" alt="Manga 9">
 
@@ -74,18 +82,20 @@
         <div id="chapterList" style="display:none;"></div>
         <div id="mangaReader" style="display:none;"></div>
 
-        <!-- 
-        <div id="Characters" style="display:none;"></div>
-        <div id="Games" style="display:none;"></div>
-        <div id="Whitepaper" style="display:none;"></div>
-        -->
+        <div id="wiki" style="display:none;"></div>
+        <div id="games"></div>
+        <div id="whitepaper" style="display:none;"></div>
+
     </main>
+
+    <!-- Manga .JS-->
+    <script src=manga.js?1100></script>
 
     <footer>
         © 2025 InhumanityStudios. All Rights Reserved.
     </footer>
 
-    <script src=manga.js?1100></script>
+
 
 </body>
 
