@@ -53,7 +53,7 @@ header {
 .header-nav a {
     color: white;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 22px;
     transition: color 0.3s;
 }
 
@@ -283,4 +283,20 @@ footer {
 
 .roadmap-list li:last-child {
     border-bottom: none;
+}
+
+.title-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.title-logo {
+    width: auto;
+    /* Adjust size */
+    height: 100px;
+    /* Maintain aspect ratio */
+    vertical-align: middle;
+    margin-right: 10px;
+    /* Space between logo and text */
 }
