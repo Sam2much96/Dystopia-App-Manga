@@ -434,6 +434,13 @@ function renderMangaList() {
 
 }
 
+
+function renderCharacterBio() {
+    // Render the character bio to the screen from characterbio.txt
+
+
+}
+
 // Show Chapters for a Manga
 // TO DO:
 // (1) Drag & Drop
