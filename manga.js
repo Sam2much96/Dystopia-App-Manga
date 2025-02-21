@@ -46,8 +46,8 @@ const mangaCollection = [
     {
         id: 1,
         title: "Dystopia App",
-        description: "YOu are a Fourth Worlder, Survive!",
-        coverImage: "assets/manga/dystopia_app/chap1/cover 1.webp",
+        description: "You are a Fourth Worlder, Survive!",
+        coverImage: "assets/manga/dystopia_app/cover/cover 1dd.png",
         chapters: [
             {
                 number: 1,
@@ -157,7 +157,7 @@ const gamesCollection = [
         title: "Dystopia App",
         description: "YOu are a Fourth Worlder, Survive!",
         coverImage: "assets/manga/dystopia_app/cover/R9_00024.webp",
-        url: "https://inhumanity-arts.itch.io/dystopia-app",
+        url: "https://dystopia-app.store",
         likes: 500,
         genre: ["Action", "RPG"],
     },

@@ -64,7 +64,7 @@ header {
 /* Carousel Styling*/
 
 .carousel {
-    width: 100%;
+    width: 380%;
     overflow: hidden;
     white-space: nowrap;
     position: relative;
@@ -72,7 +72,7 @@ header {
 
 .carousel-track {
     display: flex;
-    animation: scroll 10s linear infinite;
+    animation: scroll 40s linear infinite;
 }
 
 .carousel img {
