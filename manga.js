@@ -160,7 +160,7 @@ const mangaCollection = [
                 number: 1,
                 title: "DragonBall Z Sparking Zero",
                 pages: [
-                    "assets/manga/freedon king/ep1.webp"
+                    "assets/manga/freedom king/ep1.webp"
                 ]
             },
             {
