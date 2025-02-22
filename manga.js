@@ -118,6 +118,33 @@ const mangaCollection = [
 
                 ]
 
+            },
+            {
+                number: 4,
+                title: "Artbook 1",
+                pages: [
+                    "assets/manga/dystopia_app/cover/title-art_2.webp",
+                    "assets/manga/dystopia_app/cover/shot 100.jpg",
+                    "assets/manga/dystopia_app/cover/concept_art_2.webp",
+                    "assets/manga/dystopia_app/cover/raw 3 Dystopia Bckgrnd-1.webp",
+                    "assets/manga/dystopia_app/cover/pg 3.webp",
+                    "assets/manga/dystopia_app/cover/Background 004.jpg",
+                    "assets/manga/dystopia_app/cover/shot 58.png",
+                    "assets/manga/dystopia_app/cover/file000p0.jpg",
+                    "assets/manga/dystopia_app/cover/shot 57.png",
+                    "assets/manga/dystopia_app/cover/shot 100.jpg",
+                    "assets/manga/dystopia_app/cover/pg 25.jpg",
+                    "assets/manga/dystopia_app/cover/cover 1dd.png",
+                    "assets/manga/dystopia_app/cover/cover 2.jpg",
+                    "assets/manga/dystopia_app/cover/chap 6 cover art 2.jpg",
+                    "assets/manga/dystopia_app/cover/Background and foreground assets shot  6.jpg",
+                    "assets/manga/dystopia_app/cover/shot 58.png",
+                    "assets/manga/dystopia_app/cover/shot 49.png",
+                    "assets/manga/dystopia_app/cover/concept_art.webp",
+                    "assets/manga/dystopia_app/cover/shot 39 background.webp",
+                    "assets/manga/dystopia_app/cover/cover 2.jpg"
+
+                ]
             }
         ],
         genre: ["Fantasy", "Action", "Videogame"],
@@ -131,13 +158,20 @@ const mangaCollection = [
         chapters: [
             {
                 number: 1,
+                title: "DragonBall Z Sparking Zero",
+                pages: [
+                    "assets/manga/freedon king/ep1.webp"
+                ]
+            },
+            {
+                number: 2,
                 title: "Digital Frontier",
                 pages: [
                     "assets/manga/freedom king/ep3.jpg",
                 ]
             },
             {
-                number: 2,
+                number: 3,
                 title: "Care To Share",
                 pages: [
                     "assets/manga/freedom king/ep2.jpg",
@@ -188,6 +222,9 @@ const gamesCollection = [
 const mangaList = document.getElementById('mangaList');
 const chapterList = document.getElementById('chapterList');
 const mangaReader = document.getElementById('mangaReader');
+
+//ads elements
+const adsContainer = document.getElementById("advertising");
 
 // misc elements
 const carousel = document.querySelector(".carousel");
@@ -286,6 +323,14 @@ function setWhitePaperVisibility(isVisible) {
 }
 
 
+function setAdsVisibility(isVisible) {
+    // toggles the visibility of the games list
+    if (isVisible == true) {
+        adsContainer.classList.remove("hidden"); // Show the carousel
+    } else {
+        adsContainer.classList.add("hidden"); // Hide the carousel
+    }
+}
 
 function openUrl(url) {
 
@@ -483,8 +528,8 @@ function showReader(chapterNumber) {
     currentChapter = chapter;
     currentPageIndex = 0;
 
-    // hide the chapter list 
-    //chapterList.style.display = 'none';
+    // hide all other states
+
     setCarouselVisibility(false);
     setWhitePaperVisibility(false);
     setGamesListVisibility(false);
@@ -499,9 +544,33 @@ function showReader(chapterNumber) {
     renderPage();
 }
 
+function insertAds() {
+    //called in render page function
+    // inserts ads on the last page of the manga chapter
+    //Replace "YOUR_AD_SLOT" with your actual AdSense ad slot ID.
+
+    console.log("inserting ads");
+    setAdsVisibility(true);
+    adsContainer.innerHTML = `
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3900377589557710"
+            crossorigin="anonymous"></script>
+        <ins class="adsbygoogle"
+             style="display:block; text-align: center;"
+             data-ad-client="ca-pub-3900377589557710"
+             data-ad-slot="YOUR_AD_SLOT"
+             data-ad-format="auto"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    `;
+
+    mangaReader.appendChild(adsContainer);
+
+
+}
+
 // Render Current Manga Page
 function renderPage() {
-    //console.log("Render Page");
     const currentPage = currentChapter.pages[currentPageIndex];
 
     // Modifies the site via Inner HTML
@@ -522,6 +591,15 @@ function renderPage() {
                 </div>
             `;
 
+    // Add AdSense only on the last page
+    if (currentPageIndex === currentChapter.pages.length - 1) {
+        insertAds();
+    }
+
+    // Turn off AdSense only any other page
+    if (currentPageIndex !== currentChapter.pages.length - 1) {
+        setAdsVisibility(false);
+    }
 
     // Add double-click zoom functionality
     // using css scale transfrom
@@ -543,6 +621,7 @@ function renderPage() {
     readerImage.style.transition = "transform 0.3s ease";
     readerImage.style.cursor = "zoom-in";  // Initial cursor state
 }
+
 
 // Page Navigation
 function nextPage() {
