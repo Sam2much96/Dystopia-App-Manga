@@ -145,6 +145,35 @@ const mangaCollection = [
                     "assets/manga/dystopia_app/cover/cover 2.jpg"
 
                 ]
+            },
+            {
+                number: 5,
+                title: "The Hunt for Worlogog",
+                pages: [
+                    "assets/manga/dystopia_app/chap4/Cover 2.webp",
+                    "assets/manga/dystopia_app/chap4/pg 1.webp",
+                    "assets/manga/dystopia_app/chap4/pg 2.webp",
+                    "assets/manga/dystopia_app/chap4/pg 3.webp",
+                    "assets/manga/dystopia_app/chap4/pg 4.webp",
+                    "assets/manga/dystopia_app/chap4/pg 5.webp",
+                    "assets/manga/dystopia_app/chap4/pg 6.webp",
+                    "assets/manga/dystopia_app/chap4/pg 7.webp",
+                    "assets/manga/dystopia_app/chap4/pg 8.webp",
+                    "assets/manga/dystopia_app/chap4/pg 9.webp",
+                    "assets/manga/dystopia_app/chap4/pg 10.webp",
+                    "assets/manga/dystopia_app/chap4/pg 11.webp",
+                    "assets/manga/dystopia_app/chap4/pg 12.webp",
+                    "assets/manga/dystopia_app/chap4/pg 13.webp",
+                    "assets/manga/dystopia_app/chap4/pg 14.webp",
+                    "assets/manga/dystopia_app/chap4/pg 15.webp",
+                    "assets/manga/dystopia_app/chap4/pg 16.webp",
+                    "assets/manga/dystopia_app/chap4/pg 17.webp",
+                    "assets/manga/dystopia_app/chap4/pg 18.webp",
+                    "assets/manga/dystopia_app/chap4/pg 19.webp",
+                    "assets/manga/dystopia_app/chap4/pg 20.webp",
+                    "assets/manga/dystopia_app/chap4/pg 21.webp",
+                    "assets/manga/dystopia_app/chap4/pg 22.webp"
+                ]
             }
         ],
         genre: ["Fantasy", "Action", "Videogame"],
