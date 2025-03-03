@@ -77,7 +77,7 @@ const mangaCollection = [
             },
             {
                 number: 2,
-                title: "Police",
+                title: "Police!",
                 pages: [
                     "assets/manga/dystopia_app/chap2/cover page.webp",
                     "assets/manga/dystopia_app/chap2/cover 2.webp",
@@ -174,7 +174,45 @@ const mangaCollection = [
                     "assets/manga/dystopia_app/chap4/pg 21.webp",
                     "assets/manga/dystopia_app/chap4/pg 22.webp"
                 ]
+            },
+            {
+                number: 6,
+                title: "Aarin's Story",
+                pages: [
+                    "assets/manga/dystopia_app/chap5/chap 1 cover page.webp",
+                    "assets/manga/dystopia_app/chap5/1.jpg",
+                    "assets/manga/dystopia_app/chap5/a1.webp",
+                    "assets/manga/dystopia_app/chap5/b1.webp",
+                    "assets/manga/dystopia_app/chap5/b2.webp",
+                    "assets/manga/dystopia_app/chap5/b3.webp",
+                    "assets/manga/dystopia_app/chap5/b4.webp",
+                    "assets/manga/dystopia_app/chap5/b5.webp",
+                    "assets/manga/dystopia_app/chap5/b6.5.webp",
+                    "assets/manga/dystopia_app/chap5/b6.jpg",
+                    "assets/manga/dystopia_app/chap5/b7.webp",
+                    "assets/manga/dystopia_app/chap5/b8.jpg",
+                    "assets/manga/dystopia_app/chap5/b9.jpg",
+                    "assets/manga/dystopia_app/chap5/b10.webp",
+                    "assets/manga/dystopia_app/chap5/b11.webp",
+                    "assets/manga/dystopia_app/chap5/b12.webp",
+                    "assets/manga/dystopia_app/chap5/b13.webp",
+                    "assets/manga/dystopia_app/chap5/b14.webp",
+                    "assets/manga/dystopia_app/chap5/b15.jpg",
+                    "assets/manga/dystopia_app/chap5/b16.webp",
+                    "assets/manga/dystopia_app/chap5/b17.webp",
+                    "assets/manga/dystopia_app/chap5/b18.jpg",
+                    "assets/manga/dystopia_app/chap5/b19.webp",
+                    "assets/manga/dystopia_app/chap5/b20.jpg",
+                    "assets/manga/dystopia_app/chap5/b21.webp",
+                    "assets/manga/dystopia_app/chap5/b22.webp",
+                    "assets/manga/dystopia_app/chap5/b23.webp",
+                    "assets/manga/dystopia_app/chap5/b24.webp",
+                    "assets/manga/dystopia_app/chap5/b25.webp",
+                    "assets/manga/dystopia_app/chap5/b26.webp",
+                    "assets/manga/dystopia_app/chap5/b27.webp"
+                ]
             }
+
         ],
         genre: ["Fantasy", "Action", "Videogame"],
         likes: 342
@@ -447,6 +485,12 @@ function renderWhitePaperRoadMap() {
                 since 2020.
                 Our whitepaper outlines the vision, mission, and strategy for our project's future.
                 This includes key milestones, innovative technology, and a roadmap that will shape our journey.
+
+                Our Tokenomics plans to make Sud deflationary by burning 1 Billion $SUD Tokens and 
+                revenue raised from advertising and staking would be used to buy back more $Sud
+
+
+                
             </p>
 
             <div class="roadmap-section">
@@ -467,6 +511,42 @@ function renderWhitePaperRoadMap() {
 function showLoadingAnimation() {
     //show loading animation for pages that a still loading with css + png image rotations
 }
+
+function detectBrowser() {
+    const userAgent = navigator.userAgent.toLowerCase();
+    let browser = 'unknown';
+    let platform = 'unknown';
+
+    // Detect browser
+    if (userAgent.includes('chrome')) {
+        browser = 'Chrome';
+    } else if (userAgent.includes('firefox')) {
+        browser = 'Firefox';
+    } else if (userAgent.includes('safari')) {
+        browser = 'Safari';
+    } else if (userAgent.includes('edge')) {
+        browser = 'Edge';
+    } else if (userAgent.includes('opera') || userAgent.includes('opr')) {
+        browser = 'Opera';
+    }
+
+    // Detect platform
+    if (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/.test(userAgent)) {
+        platform = 'Mobile';
+    } else {
+        platform = 'Desktop';
+    }
+
+    console.log(`Browser: ${browser}, Platform: ${platform}`);
+
+    //save browser and platform to globals
+    window.browser = browser
+    window.platform = platform
+    //return { browser, platform };
+}
+
+
+
 
 
 // Home Screen & Landing Page
@@ -515,16 +595,15 @@ function renderCharacterBio() {
 
 }
 
-// Show Chapters for a Manga
-// TO DO:
-// (1) Drag & Drop
-// (2) Panel View
-// (3) Music
-// (4) Animated Gif Pages
-// (5) Pinch to zoom (Mobile)
+
 
 function showChapters(manga) {
-    //console.log("Show Chapters");
+    /**
+     * Show Chapters for a Manga
+     *
+     *
+     */
+    console.log("Show Chapters");
 
     currentManga = manga;
 
@@ -535,20 +614,26 @@ function showChapters(manga) {
     setMangaReaderVisibility(false);
     setWhitePaperVisibility(false);
 
-    //mangaList.style.display = 'none'; // hide the mangaList page via css scripting
+
     chapterList.style.display = 'block'; // change the styling of the website to full screen
 
-    // create Button to go back to homescreen/ render Manga List
+    // Get the latest chapter number
+    const latestChapterNumber = Math.max(...manga.chapters.map(ch => ch.number));
+
+
+
+    // Create button to go back to homescreen/render manga list
     chapterList.innerHTML = `
-                <button class="btn" onclick="renderMangaList()">← Back to Manga List</button>
-                <h1>${manga.title}</h1>
-                <p>${manga.description}</p>
-                ${manga.chapters.map(chapter => `
-                    <div class="chapter-item" onclick="showReader(${chapter.number})">
-                        Chapter ${chapter.number}: ${chapter.title}
-                    </div>
-                `).join('')}
-            `;
+        <button class="btn" onclick="renderMangaList()">← Back to Manga List</button>
+        <h1>${manga.title}</h1>
+        <p>${manga.description}</p>
+        ${manga.chapters.map(chapter => `
+            <div class="chapter-item" onclick="showReader(${chapter.number})">
+                Chapter ${chapter.number}: ${chapter.title} 
+                ${chapter.number === latestChapterNumber ? '<span class="new-icon">new</span>' : ''}
+            </div>
+        `).join('')}
+    `;
 }
 
 // Show Manga Reader
@@ -574,9 +659,15 @@ function showReader(chapterNumber) {
 }
 
 function insertAds() {
-    //called in render page function
-    // inserts ads on the last page of the manga chapter
-    //Replace "YOUR_AD_SLOT" with your actual AdSense ad slot ID.
+    /**
+     * Insert Adsense Ads Into Final Pages
+     * 
+     * called in render page function
+     * inserts ads on the last page of the manga chapter
+     * Replace "YOUR_AD_SLOT" with your actual AdSense ad slot ID. 
+     *
+     */
+
 
     console.log("inserting ads");
     setAdsVisibility(true);
@@ -602,10 +693,25 @@ function insertAds() {
 
 // Render Current Manga Page
 function renderPage() {
-    const currentPage = currentChapter.pages[currentPageIndex];
+    /**
+     * Renders Manga Pages
+     * 
+     * TO DO:
+     * 
+     * (1) Drag & Drop
+     * (2) Panel View
+     * (3) Music
+     * (4) Animated Gif Pages
+     * (5) Pinch to zoom (Mobile) 
+     */
+    //window.platform = "Mobile"
 
-    // Modifies the site via Inner HTML
-    mangaReader.innerHTML = `
+    // Desktop View
+    if (window.platform == "Desktop") {
+        const currentPage = currentChapter.pages[currentPageIndex];
+
+        // Modifies the site via Inner HTML
+        mangaReader.innerHTML = `
                 <button class="btn" onclick="showChapters(currentManga)">← Back to Chapters</button>
                 <h2>Chapter ${currentChapter.number}: ${currentChapter.title}</h2>
                 <div class="navigation">
@@ -622,35 +728,57 @@ function renderPage() {
                 </div>
             `;
 
-    // Add AdSense only on the last page
-    if (currentPageIndex === currentChapter.pages.length - 1) {
-        insertAds();
-    }
-
-    // Turn off AdSense only any other page
-    if (currentPageIndex !== currentChapter.pages.length - 1) {
-        setAdsVisibility(false);
-    }
-
-    // Add double-click zoom functionality
-    // using css scale transfrom
-    const readerImage = document.getElementById("readerImage");
-    let isZoomed = false;
-
-    readerImage.addEventListener("dblclick", () => {
-        isZoomed = !isZoomed;
-        if (isZoomed) {
-            readerImage.style.transform = "scale(2)";  // Zoom in
-            readerImage.style.cursor = "zoom-out";
-        } else {
-            readerImage.style.transform = "scale(1)";  // Reset to normal
-            readerImage.style.cursor = "zoom-in";
+        // Add AdSense only on the last page
+        if (currentPageIndex === currentChapter.pages.length - 1) {
+            insertAds();
         }
-    });
 
-    // Apply CSS for smooth zoom effect
-    readerImage.style.transition = "transform 0.3s ease";
-    readerImage.style.cursor = "zoom-in";  // Initial cursor state
+        // Turn off AdSense only any other page
+        if (currentPageIndex !== currentChapter.pages.length - 1) {
+            setAdsVisibility(false);
+        }
+
+
+    }
+
+    // Mobile VIew
+    if (window.platform === "Mobile") {
+        console.log("Rendering Webtoon Layout");
+
+        // Modifies the site via Inner HTML
+        mangaReader.innerHTML = `
+        <button class="btn" onclick="showChapters(currentManga)">← Back to Chapters</button>
+        <h2>Chapter ${currentChapter.number}: ${currentChapter.title}</h2>
+        <div id="mangaPages">
+            ${currentChapter.pages.map((page, index) => `
+                <img class="manga-page" src="${page}" alt="Page ${index + 1}">
+            `).join('')}
+        </div>
+    `;
+
+        insertAds();
+
+        // Add double-click zoom functionality
+        // using css scale transfrom
+        const readerImage = document.getElementById("mangaPages");
+        let isZoomed = false;
+
+        readerImage.addEventListener("dblclick", () => {
+            isZoomed = !isZoomed;
+            if (isZoomed) {
+                readerImage.style.transform = "scale(2) translateY(1000px)";  // Zoom in and move down
+                readerImage.style.cursor = "zoom-out";
+            } else {
+                readerImage.style.transform = "scale(1) translateY(0)";  // Reset to normal
+                readerImage.style.cursor = "zoom-in";
+            }
+        });
+
+        // Apply CSS for smooth zoom effect
+        readerImage.style.transition = "transform 0.3s ease";
+        readerImage.style.cursor = "zoom-in";  // Initial cursor state
+    }
+
 }
 
 
