@@ -35,252 +35,12 @@
  * (2) Used for Rendering The Landing Page Manga List & Manga Cards
  * 
  * TO Do:
- * (1) Optimize database for faster load times
+ * (1) Optimize database for faster load times (done)
  * 
- * BUGs:
- * (1) Breaks out when js file is placed in header instead of body
+ * 
  * 
  */
 
-const mangaCollection = [
-    {
-        id: 1,
-        title: "Dystopia App",
-        description: "You are a Fourth Worlder, Survive!",
-        coverImage: "assets/manga/dystopia_app/cover/cover 1dd.png",
-        chapters: [
-            {
-                number: 1,
-                title: "The Money Heist",
-                pages: [
-                    "assets/manga/dystopia_app/chap1/cover 2.webp",
-                    "assets/manga/dystopia_app/chap1/cover 1.webp",
-                    "assets/manga/dystopia_app/chap1/pg 1.webp",
-                    "assets/manga/dystopia_app/chap1/pg 2.webp",
-                    "assets/manga/dystopia_app/chap1/pg 3.webp",
-                    "assets/manga/dystopia_app/chap1/pg 4.webp",
-                    "assets/manga/dystopia_app/chap1/pg 5.webp",
-                    "assets/manga/dystopia_app/chap1/pg 6.webp",
-                    "assets/manga/dystopia_app/chap1/pg 7.webp",
-                    "assets/manga/dystopia_app/chap1/pg 8.webp",
-                    "assets/manga/dystopia_app/chap1/pg 9.webp",
-                    "assets/manga/dystopia_app/chap1/pg 10.webp",
-                    "assets/manga/dystopia_app/chap1/pg 11.webp",
-                    "assets/manga/dystopia_app/chap1/pg 12.webp",
-                    "assets/manga/dystopia_app/chap1/pg 13.webp",
-                    "assets/manga/dystopia_app/chap1/pg 14.webp",
-                    "assets/manga/dystopia_app/chap1/pg 15.webp",
-                    "assets/manga/dystopia_app/chap1/pg 16.webp",
-                    "assets/manga/dystopia_app/chap1/pg 17.webp",
-                    "assets/manga/dystopia_app/chap1/pg 18.webp"
-                ]
-            },
-            {
-                number: 2,
-                title: "Police!",
-                pages: [
-                    "assets/manga/dystopia_app/chap2/cover page.webp",
-                    "assets/manga/dystopia_app/chap2/cover 2.webp",
-                    "assets/manga/dystopia_app/chap2/Pg 1.webp",
-                    "assets/manga/dystopia_app/chap2/Pg 2.webp",
-                    "assets/manga/dystopia_app/chap2/Pg 3.webp",
-                    "assets/manga/dystopia_app/chap2/Pg 4.webp",
-                    "assets/manga/dystopia_app/chap2/Pg 5.webp",
-                    "assets/manga/dystopia_app/chap2/Pg 6.webp",
-                    "assets/manga/dystopia_app/chap2/Pg 7.webp",
-                    "assets/manga/dystopia_app/chap2/Pg 8.webp",
-                    "assets/manga/dystopia_app/chap2/Pg 9.webp",
-                    "assets/manga/dystopia_app/chap2/Pg 10.webp",
-                    "assets/manga/dystopia_app/chap2/Pg 11.webp",
-                    "assets/manga/dystopia_app/chap2/Pg 12.webp",
-                    "assets/manga/dystopia_app/chap2/Pg 13.webp",
-                    "assets/manga/dystopia_app/chap2/Pg 14.webp",
-                    "assets/manga/dystopia_app/chap2/Pg 15.webp",
-                    "assets/manga/dystopia_app/chap2/Pg 16.webp",
-                    "assets/manga/dystopia_app/chap2/Pg 17.webp",
-                    "assets/manga/dystopia_app/chap2/Pg 18.webp",
-                    "assets/manga/dystopia_app/chap2/Pg 19.webp",
-                    "assets/manga/dystopia_app/chap2/Pg 20.webp",
-                    "assets/manga/dystopia_app/chap2/Pg 21.webp",
-                ]
-            },
-            {
-                number: 3,
-                title: "Neo Sud",
-                pages: [
-                    "assets/manga/dystopia_app/chap3/Cover 1.webp",
-                    "assets/manga/dystopia_app/chap3/pg 1.webp",
-                    "assets/manga/dystopia_app/chap3/pg 2.webp",
-                    "assets/manga/dystopia_app/chap3/pg 3.webp",
-                    "assets/manga/dystopia_app/chap3/pg 4.webp",
-                    "assets/manga/dystopia_app/chap3/pg 5.webp",
-                    "assets/manga/dystopia_app/chap3/pg 6.webp",
-
-                ]
-
-            },
-            {
-                number: 4,
-                title: "Artbook 1",
-                pages: [
-                    "assets/manga/dystopia_app/cover/title-art_2.webp",
-                    "assets/manga/dystopia_app/cover/shot 100.jpg",
-                    "assets/manga/dystopia_app/cover/concept_art_2.webp",
-                    "assets/manga/dystopia_app/cover/raw 3 Dystopia Bckgrnd-1.webp",
-                    "assets/manga/dystopia_app/cover/pg 3.webp",
-                    "assets/manga/dystopia_app/cover/Background 004.jpg",
-                    "assets/manga/dystopia_app/cover/shot 58.png",
-                    "assets/manga/dystopia_app/cover/file000p0.jpg",
-                    "assets/manga/dystopia_app/cover/shot 57.png",
-                    "assets/manga/dystopia_app/cover/shot 100.jpg",
-                    "assets/manga/dystopia_app/cover/pg 25.jpg",
-                    "assets/manga/dystopia_app/cover/cover 1dd.png",
-                    "assets/manga/dystopia_app/cover/cover 2.jpg",
-                    "assets/manga/dystopia_app/cover/chap 6 cover art 2.jpg",
-                    "assets/manga/dystopia_app/cover/Background and foreground assets shot  6.jpg",
-                    "assets/manga/dystopia_app/cover/shot 58.png",
-                    "assets/manga/dystopia_app/cover/shot 49.png",
-                    "assets/manga/dystopia_app/cover/concept_art.webp",
-                    "assets/manga/dystopia_app/cover/shot 39 background.webp",
-                    "assets/manga/dystopia_app/cover/cover 2.jpg"
-
-                ]
-            },
-            {
-                number: 5,
-                title: "The Hunt for Worlogog",
-                pages: [
-                    "assets/manga/dystopia_app/chap4/Cover 2.webp",
-                    "assets/manga/dystopia_app/chap4/pg 1.webp",
-                    "assets/manga/dystopia_app/chap4/pg 2.webp",
-                    "assets/manga/dystopia_app/chap4/pg 3.webp",
-                    "assets/manga/dystopia_app/chap4/pg 4.webp",
-                    "assets/manga/dystopia_app/chap4/pg 5.webp",
-                    "assets/manga/dystopia_app/chap4/pg 6.webp",
-                    "assets/manga/dystopia_app/chap4/pg 7.webp",
-                    "assets/manga/dystopia_app/chap4/pg 8.webp",
-                    "assets/manga/dystopia_app/chap4/pg 9.webp",
-                    "assets/manga/dystopia_app/chap4/pg 10.webp",
-                    "assets/manga/dystopia_app/chap4/pg 11.webp",
-                    "assets/manga/dystopia_app/chap4/pg 12.webp",
-                    "assets/manga/dystopia_app/chap4/pg 13.webp",
-                    "assets/manga/dystopia_app/chap4/pg 14.webp",
-                    "assets/manga/dystopia_app/chap4/pg 15.webp",
-                    "assets/manga/dystopia_app/chap4/pg 16.webp",
-                    "assets/manga/dystopia_app/chap4/pg 17.webp",
-                    "assets/manga/dystopia_app/chap4/pg 18.webp",
-                    "assets/manga/dystopia_app/chap4/pg 19.webp",
-                    "assets/manga/dystopia_app/chap4/pg 20.webp",
-                    "assets/manga/dystopia_app/chap4/pg 21.webp",
-                    "assets/manga/dystopia_app/chap4/pg 22.webp"
-                ]
-            },
-            {
-                number: 6,
-                title: "Aarin's Story",
-                pages: [
-                    "assets/manga/dystopia_app/chap5/chap 1 cover page.webp",
-                    "assets/manga/dystopia_app/chap5/1.jpg",
-                    "assets/manga/dystopia_app/chap5/a1.webp",
-                    "assets/manga/dystopia_app/chap5/b1.webp",
-                    "assets/manga/dystopia_app/chap5/b2.webp",
-                    "assets/manga/dystopia_app/chap5/b3.webp",
-                    "assets/manga/dystopia_app/chap5/b4.webp",
-                    "assets/manga/dystopia_app/chap5/b5.webp",
-                    "assets/manga/dystopia_app/chap5/b6.jpg",
-                    "assets/manga/dystopia_app/chap5/b6.5.webp",
-                    "assets/manga/dystopia_app/chap5/b7.webp",
-                    "assets/manga/dystopia_app/chap5/b8.jpg",
-                    "assets/manga/dystopia_app/chap5/b9.jpg",
-                    "assets/manga/dystopia_app/chap5/b10.webp",
-                    "assets/manga/dystopia_app/chap5/b11.webp",
-                    "assets/manga/dystopia_app/chap5/b12.webp",
-                    "assets/manga/dystopia_app/chap5/b13.webp",
-                    "assets/manga/dystopia_app/chap5/b14.webp",
-                    "assets/manga/dystopia_app/chap5/b15.jpg",
-                    "assets/manga/dystopia_app/chap5/b16.webp",
-                    "assets/manga/dystopia_app/chap5/b17.webp",
-                    "assets/manga/dystopia_app/chap5/b18.jpg",
-                    "assets/manga/dystopia_app/chap5/b19.webp",
-                    "assets/manga/dystopia_app/chap5/b20.jpg",
-                    "assets/manga/dystopia_app/chap5/b21.webp",
-                    "assets/manga/dystopia_app/chap5/b22.webp",
-                    "assets/manga/dystopia_app/chap5/b23.webp",
-                    "assets/manga/dystopia_app/chap5/b24.webp",
-                    "assets/manga/dystopia_app/chap5/b25.webp",
-                    "assets/manga/dystopia_app/chap5/b26.webp",
-                    "assets/manga/dystopia_app/chap5/b27.webp"
-                ]
-            }
-
-        ],
-        genre: ["Fantasy", "Action", "Videogame"],
-        likes: 342
-    },
-    {
-        id: 2,
-        title: "Freedom King",
-        description: "A comedy slice of life series about a group of wacky college friends.",
-        coverImage: "assets/manga/freedom king/coverart.png",
-        chapters: [
-            {
-                number: 1,
-                title: "DragonBall Z Sparking Zero",
-                pages: [
-                    "assets/manga/freedom king/ep1.webp"
-                ]
-            },
-            {
-                number: 2,
-                title: "Digital Frontier",
-                pages: [
-                    "assets/manga/freedom king/ep3.jpg",
-                ]
-            },
-            {
-                number: 3,
-                title: "Care To Share",
-                pages: [
-                    "assets/manga/freedom king/ep2.jpg",
-                ]
-            }
-        ],
-        genre: ["Slice of Life", "Comedy"],
-        likes: 512
-    }
-];
-
-
-// Games Collection from itchio
-const gamesCollection = [
-    {
-        id: 1,
-        title: "Dystopia App",
-        description: "YOu are a Fourth Worlder, Survive!",
-        coverImage: "assets/manga/dystopia_app/cover/R9_00024.webp",
-        url: "https://dystopia-app.store",
-        likes: 500,
-        genre: ["Action", "RPG"],
-    },
-    {
-        id: 2,
-        title: "Cuboids",
-        description: "Life as a 2D Cube in a 3D Cuboid World",
-        coverImage: "assets/games/cuboid.png",
-        url: "https://inhumanity-arts.itch.io/cuboids",
-        likes: 140,
-        genre: ["HyperCasual", "Point & Click"],
-    },
-    {
-        id: 3,
-        title: "Tapping Bird",
-        description: "An intersellar flappy bird game!",
-        coverImage: "assets/games/tappingBird.png",
-        url: "https://inhumanity-arts.itch.io/tapping-bird",
-        likes: 186,
-        genre: ["casual", "Point & Click"],
-
-    }];
 
 
 // Get Div Elements from the DOM as constants
@@ -298,10 +58,10 @@ const carousel = document.querySelector(".carousel");
 
 
 // Character Div Elements
-const char_wiki = document.getElementById('wiki');
+const wiki = document.getElementById('wiki');
 const games = document.getElementById('games');
 const whitepaper = document.getElementById('whitepaper');
-
+const shop = document.getElementById("shop");
 
 
 
@@ -399,6 +159,28 @@ function setAdsVisibility(isVisible) {
     }
 }
 
+
+
+function setShopVisibility(isVisible) {
+    // toggles the visibility of the games list
+    if (isVisible == true) {
+        shop.classList.remove("hidden"); // Show the carousel
+    } else {
+        shop.classList.add("hidden"); // Hide the carousel
+    }
+}
+
+function setWiKiVisibility(isVisible) {
+    {
+        // toggles the visibility of the games list
+        if (isVisible == true) {
+            wiki.classList.remove("hidden"); // Show the carousel
+        } else {
+            wiki.classList.add("hidden"); // Hide the carousel
+        }
+    }
+}
+
 function openUrl(url) {
 
     // open url to a new page
@@ -413,51 +195,40 @@ function openUrl(url) {
 //Navigation UI settings
 
 
-function renderGamesList() {
-    //renders a Games cards list from itchio
-    console.log("Games List Render Triggered");
 
-    games.innerHTML = '';
 
-    // Turn of chapter list & Manga Renders via css + js
-
+export function renderShop() {
+    //renders character bio from character bio.txt
+    console.log("Rendering Shop");
 
     setMangaListVisibility(false);
     setChapterListVisibility(false);
     setMangaReaderVisibility(false);
-    setWhitePaperVisibility(false);
-    setGamesListVisibility(true);
+    setGamesListVisibility(false);
     setCarouselVisibility(true);
+    setWhitePaperVisibility(false);
+    setShopVisibility(true);
+    setWiKiVisibility(false);
 
-    //games.style.display = "";
-    console.log(games.style.display);
+    shop.innerHTML = `    
+    <h1>Shop</h1>
+    <div class="shop-items">
+        ${window.shopItems.map(item => `
+            <div class="shop-item">
+                <img src="${item.image}" alt="${item.name}">
+                <h2>${item.name}</h2>
+                <p>${item.description}</p>
+                <a href="${item.image}" download="${item.name}.jpg" class="download-btn">
+                    Download
+                </a>
+            </div>
+        `).join('')}
+    </div>
 
-    //creates a Manga Card div for each element in the Manga Collection Constant
-    gamesCollection.forEach(game => {
-
-        // create a Game card for each Manga
-        const gameCard = document.createElement('div');
-        gameCard.className = 'game-card'; // set div class id for css styling
-        gameCard.innerHTML = `
-                    <img src="${game.coverImage}" alt="${game.title}">
-                    <div class="game-card-content">
-                        <h2>${game.title}</h2>
-                        <p>${game.genre.join(', ')}</p>
-                        <div>❤️ ${game.likes} Likes</div>
-                    </div>
-                `; gameCard.onclick = () => openUrl(game.url); // map Card Div to show Chapters function
-
-        games.appendChild(gameCard);
-    });
-
+    `
 }
 
-function renderCharactersList() {
-    //renders character bio from character bio.txt
-    console.log("Characters List Render Triggered");
-}
-
-function renderWhitePaperRoadMap() {
+export function renderWhitePaperRoadMap() {
     // show the whitepaper / roadmap
     console.log("Whitepaper Render Triggered");
 
@@ -468,6 +239,8 @@ function renderWhitePaperRoadMap() {
     setGamesListVisibility(false);
     setCarouselVisibility(true);
     setWhitePaperVisibility(true);
+    setShopVisibility(false);
+    setWiKiVisibility(false);
 
     const whitepaperImg = "assets/misc/whitepaper.jpeg";
     const title = "the project's whitepaper and roadmap"
@@ -512,7 +285,12 @@ function showLoadingAnimation() {
     //show loading animation for pages that a still loading with css + png image rotations
 }
 
-function detectBrowser() {
+export function detectBrowser() {
+    /**
+     * Platform Detection is Buggy On Mobile with Embedded Webbrowsers
+     * It detects them as desktops 
+     *
+     */
     const userAgent = navigator.userAgent.toLowerCase();
     let browser = 'unknown';
     let platform = 'unknown';
@@ -549,55 +327,11 @@ function detectBrowser() {
 
 
 
-// Home Screen & Landing Page
-// Render Manga List by modifying the Manga List Div in the Dom
-function renderMangaList() {
-    console.log("Render Manga List Triggered ");
-
-    mangaList.innerHTML = '';
-
-    // Turn of chapter list & Manga Renders via css + js
-
-
-    setMangaListVisibility(true);
-    setChapterListVisibility(false);
-    setMangaReaderVisibility(false);
-    setGamesListVisibility(false);
-    setWhitePaperVisibility(false);
-    setCarouselVisibility(true);
-
-    //creates a Manga Card div for each element in the Manga Collection Constant
-    mangaCollection.forEach(manga => {
-
-        // create a manga card for each Manga
-        const mangaCard = document.createElement('div');
-        mangaCard.className = 'manga-card';
-        mangaCard.innerHTML = `
-                    <img src="${manga.coverImage}" alt="${manga.title}">
-                    <div class="manga-card-content">
-                        <h2>${manga.title}</h2>
-                        <p>${manga.genre.join(', ')}</p>
-                        <div>❤️ ${manga.likes} Likes</div>
-                    </div>
-                `; mangaCard.onclick = () => showChapters(manga); // map Card Div to show Chapters function
-
-        mangaList.appendChild(mangaCard);
-    });
 
 
 
-}
 
-
-function renderCharacterBio() {
-    // Render the character bio to the screen from characterbio.txt
-
-
-}
-
-
-
-function showChapters(manga) {
+export function showChapters(manga) {
     /**
      * Show Chapters for a Manga
      *
@@ -613,6 +347,8 @@ function showChapters(manga) {
     setChapterListVisibility(true);
     setMangaReaderVisibility(false);
     setWhitePaperVisibility(false);
+    setShopVisibility(false);
+    setWiKiVisibility(false);
 
 
     chapterList.style.display = 'block'; // change the styling of the website to full screen
@@ -637,7 +373,7 @@ function showChapters(manga) {
 }
 
 // Show Manga Reader
-function showReader(chapterNumber) {
+export function showReader(chapterNumber) {
     const chapter = currentManga.chapters.find(c => c.number === chapterNumber);
     currentChapter = chapter;
     currentPageIndex = 0;
@@ -650,7 +386,8 @@ function showReader(chapterNumber) {
     setMangaListVisibility(false);
     setChapterListVisibility(false);
     setMangaReaderVisibility(true);
-
+    setWiKiVisibility(false);
+    setShopVisibility(false);
 
     // make the manga reader full screen
     mangaReader.style.display = 'block';
@@ -691,8 +428,8 @@ function insertAds() {
 
 }
 
-// Render Current Manga Page
-function renderPage() {
+
+export function renderPage() {
     /**
      * Renders Manga Pages
      * 
@@ -703,11 +440,12 @@ function renderPage() {
      * (3) Music
      * (4) Animated Gif Pages
      * (5) Pinch to zoom (Mobile) 
+     * (6) Export function to Netlify api for SSR (Server Side Rendering)
      */
     //window.platform = "Mobile"
 
     // Desktop View
-    if (window.platform == "Desktop") {
+    if (window.platform === "Desktop") {
         const currentPage = currentChapter.pages[currentPageIndex];
 
         // Modifies the site via Inner HTML
@@ -782,6 +520,47 @@ function renderPage() {
 }
 
 
+export function renderGamesList() {
+    //renders a Games cards list from itchio
+    console.log("Games List Render Triggered");
+
+    games.innerHTML = '';
+
+    // Turn of chapter list & Manga Renders via css + js
+
+
+    setMangaListVisibility(false);
+    setChapterListVisibility(false);
+    setMangaReaderVisibility(false);
+    setWhitePaperVisibility(false);
+    setGamesListVisibility(true);
+    setCarouselVisibility(true);
+    setShopVisibility(false);
+    setWiKiVisibility(false);
+    //console.log(games.style.display);
+
+    //creates a Manga Card div for each element in the Manga Collection Constant
+    window.gamesCollection?.forEach(game => {
+
+        // create a Game card for each Manga
+        const gameCard = document.createElement('div');
+        gameCard.className = 'game-card'; // set div class id for css styling
+        gameCard.innerHTML = `
+                    <img src="${game.coverImage}" alt="${game.title}">
+                    <div class="game-card-content">
+                        <h2>${game.title}</h2>
+                        <p>${game.genre.join(', ')}</p>
+                        <div>❤️ ${game.likes} Likes</div>
+                    </div>
+                `; gameCard.onclick = () => openUrl(game.url); // map Card Div to show Chapters function
+
+        games.appendChild(gameCard);
+    });
+
+}
+
+
+
 // Page Navigation
 function nextPage() {
     if (currentPageIndex < currentChapter.pages.length - 1) {
@@ -799,9 +578,158 @@ function prevPage() {
 
 //double tap to zoom in / out
 
+async function loadMangaCollection() {
+    try {
+        const response = await fetch("/data/manga.json"); // Adjust path if necessary
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json(); // Parse JSON
+        //console.log(data); // Check if data is correctly fetched
+
+        // Store it in mangaCollection
+        //const mangaCollection2 = data;
+
+        window.mangaCollection = data
+
+        // Use mangaCollection as needed
+        //console.log(mangaCollection2);
+    } catch (error) {
+        console.error("Error loading manga collection:", error);
+    }
+}
+
+
+async function loadCharacterBio() {
+    try {
+        const response = await fetch("/public/Dystopia characters bio.txt"); // Path to your text file
+        if (!response.ok) {
+            throw new Error("Failed to load text file");
+        }
+        window.wiki = await response.text(); // Convert response to text
+
+    } catch (error) {
+        console.error("Error loading text:", error);
+    }
+}
+
+
+// Home Screen & Landing Page
+// Render Manga List by modifying the Manga List Div in the Dom
+export function renderMangaList() {
+    console.log("Render Manga List Triggered ");
+
+    mangaList.innerHTML = '';
+
+    // Turn of chapter list & Manga Renders via css + js
+
+
+    setMangaListVisibility(true);
+    setChapterListVisibility(false);
+    setMangaReaderVisibility(false);
+    setGamesListVisibility(false);
+    setWhitePaperVisibility(false);
+    setCarouselVisibility(true);
+    setShopVisibility(false);
+    setWiKiVisibility(false);
+
+    //creates a Manga Card div for each element in the Manga Collection Constant
+    window.mangaCollection.forEach(manga => {
+
+        // create a manga card for each Manga
+        const mangaCard = document.createElement('div');
+        mangaCard.className = 'manga-card';
+        mangaCard.innerHTML = `
+                    <img src="${manga.coverImage}" alt="${manga.title}">
+                    <div class="manga-card-content">
+                        <h2>${manga.title}</h2>
+                        <p>${manga.genre.join(', ')}</p>
+                        <div>❤️ ${manga.likes} Likes</div>
+                    </div>
+                `; mangaCard.onclick = () => showChapters(manga); // map Card Div to show Chapters function
+
+        mangaList.appendChild(mangaCard);
+    });
+
+
+
+}
+
+export function renderWiKi() {
+    console.log("Characters List Render Triggered");
+
+    mangaList.innerHTML = '';
+
+    // Turn of chapter list & Manga Renders via css + js
+
+
+    setMangaListVisibility(false);
+    setChapterListVisibility(false);
+    setMangaReaderVisibility(false);
+    setGamesListVisibility(false);
+    setWhitePaperVisibility(false);
+    setCarouselVisibility(true);
+    setShopVisibility(false);
+    setWiKiVisibility(true);
+    wiki.innerText = window.wiki;
+}
+
+async function loadGameCollection() {
+    try {
+        const response = await fetch("/data/games.json"); // Adjust path if necessary
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json(); // Parse JSON
+        //console.log(data); // Check if data is correctly fetched
+
+        // Store it in mangaCollection
+        //const mangaCollection2 = data;
+
+        window.gamesCollection = data
+
+        // Use mangaCollection as needed
+        //console.log(mangaCollection2);
+    } catch (error) {
+        console.error("Error loading games collection:", error);
+    }
+}
+
+
+async function loadShopItems() {
+    try {
+        const response = await fetch("/data/shop.json"); // Adjust path if necessary
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json(); // Parse JSON
+
+        window.shopItems = data
+
+    } catch (error) {
+        console.error("Error loading manga collection:", error);
+    }
+}
+
+
+// Load Database from json
+await loadMangaCollection();
+await loadGameCollection();
+await loadShopItems();
+await loadCharacterBio();
+
+// Attach functions to `window` to make them available in the global scope
+window.renderGamesList = renderGamesList;
+window.renderMangaList = renderMangaList;
+window.renderShop = renderShop;
+window.renderWhitePaperRoadMap = renderWhitePaperRoadMap;
+window.renderWiKi = renderWiKi;
 
 
 
 
-// Load Landing Page
+// Load Landing page
 renderMangaList();
+
+// Debug Browser type
+detectBrowser();

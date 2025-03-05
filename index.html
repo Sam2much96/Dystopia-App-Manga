@@ -28,22 +28,12 @@
     <meta name="twitter:image" content="assets/manga/dystopia_app/cover/concept_art_2.jpg">
 
 
-    <!-- Google tag (gtag.js) for analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-88J7FG5G2M"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'G-88J7FG5G2M');
-    </script>
-
 
 
 </head>
 
 
-<body onload="detectBrowser()">
+<body>
     <header>
         <!-- Header -->
         <div class="title-container" onclick="renderMangaList()">
@@ -53,11 +43,13 @@
 
 
         <nav>
-            <!-- Navigation Bar -->
+            <!-- Navigation Bar mapped to window binded functions -->
             <ul class="header-nav">
                 <li><a href="#" onclick="renderGamesList()">Games</a></li>
                 <li><a href="#" onclick="renderMangaList()">Comics</a></li>
-                <li><a href="#" onclick="renderWhitePaperRoadMap()">Whitepaper</a></li>
+                <li><a href="#" onclick="renderShop()">Shop</a></li>
+                <li><a href="#" onclick="renderWiKi()">Wiki</a></li>
+                <li><a href="#" onclick="renderWhitePaperRoadMap()">Roadmap</a></li>
 
 
             </ul>
@@ -109,14 +101,14 @@
         <div id="chapterList" style="display:none;"></div>
         <div id="mangaReader" style="display:none;"></div>
         <div id="advertising"></div>
-        <div id="wiki" style="display:none;"></div>
+        <div id="wiki"></div>
         <div id="games"></div>
         <div id="whitepaper" style="display:none;"></div>
+        <div id="shop"></div>
 
     </main>
 
-    <!-- Manga .JS-->
-    <script src=manga.js?1100></script>
+
 
     <footer>
         © 2025 InhumanityStudios.
@@ -137,7 +129,18 @@
 
     </footer>
 
+    <!-- Manga .JS-->
+    <script type="module" async src=manga.js?1100></script>
 
+    <!-- Google tag (gtag.js) for analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-88J7FG5G2M"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-88J7FG5G2M');
+    </script>
 
 </body>
 

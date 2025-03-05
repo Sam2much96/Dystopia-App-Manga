@@ -1,0 +1,8 @@
+[build]
+  functions = "netlify/functions"
+
+[[redirects]]
+  from = "/manga/chapter-:chapter"
+  to = "/.netlify/functions/renderPage?chapter=:chapter"
+  status = 200
+  force = true
