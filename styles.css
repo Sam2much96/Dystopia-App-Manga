@@ -194,7 +194,7 @@ header {
 
 #readerImage {
     max-width: 100%;
-    max-height: 80vh;
+    max-height: 100%;
     display: block;
     margin: 0 auto;
 }
