@@ -596,7 +596,7 @@ async function loadMangaCollection() {
 async function loadCharacterBio() {
 
     try {
-        const response = await fetch("./data/Dystopia characters bio.txt"); // Path to your text file
+        const response = await fetch("/data/Dystopia characters bio.txt"); // Path to your text file
         if (!response.ok) {
             throw new Error("Failed to load text file");
         }
