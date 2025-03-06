@@ -95,3 +95,7 @@ Deploy for testing	`netlify deploy --build --draft`
 How to Build & Test
 
 Run `npm run generate && npx netlify dev --verbose`
+
+
+API Database
+call `https://dystopia-app.site/api/manga` to fetch securely manga database for the side as json

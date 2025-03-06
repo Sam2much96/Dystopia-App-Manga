@@ -14,5 +14,11 @@
   to = "/assets/:splat"
   status = 200
 
+[[redirects]]
+  from = "/api/manga"
+  to = "/.netlify/functions/getMangaDb"
+  status = 200
+
+
 [functions]
 node_bundler = "esbuild"
