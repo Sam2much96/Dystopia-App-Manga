@@ -23,6 +23,10 @@
  * (3) Add New Tag for recent updates (1/2)
  */
 
+import { readFileSync } from 'fs';
+
+
+const dB_Remote = false; // dynamic vs static loading switch dependent on database size/ remote database fetching
 
 
 // Get Div Elements from the DOM as constants
@@ -562,37 +566,59 @@ function prevPage() {
 //double tap to zoom in / out
 
 async function loadMangaCollection() {
-    try {
-        const response = await fetch("/data/manga.json"); // Adjust path if necessary
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
+    if (dB_Remote) {
+        // Load Remote Database Data Slower
+        try {
+            const response = await fetch("/data/manga.json"); // Adjust path if necessary
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json(); // Parse JSON
+            //console.log(data); // Check if data is correctly fetched
+
+            // Store it in mangaCollection
+            //const mangaCollection2 = data;
+
+            window.mangaCollection = data
+
+            console.log(`✅ Loaded Manga Database 1`); // Check if the data loads correctly
+        } catch (error) {
+            console.error("Error loading manga collection:", error);
         }
-        const data = await response.json(); // Parse JSON
-        //console.log(data); // Check if data is correctly fetched
-
-        // Store it in mangaCollection
-        //const mangaCollection2 = data;
-
-        window.mangaCollection = data
-
-        // Use mangaCollection as needed
-        //console.log(mangaCollection2);
-    } catch (error) {
-        console.error("Error loading manga collection:", error);
     }
+
+    if (!dB_Remote) {
+        // Load Local database faster
+
+        // read local database for faster load times and lower network requirements
+        window.mangaCollection = JSON.parse(readFileSync("./data/manga.json", "utf-8"));
+        console.log(`✅ Loaded Manga Database 2`); // Check if the data loads correctly
+    }
+
 }
 
 
 async function loadCharacterBio() {
-    try {
-        const response = await fetch("/public/Dystopia characters bio.txt"); // Path to your text file
-        if (!response.ok) {
-            throw new Error("Failed to load text file");
-        }
-        window.wiki = await response.text(); // Convert response to text
+    if (dB_Remote) {
+        try {
+            const response = await fetch("./data/Dystopia characters bio.txt"); // Path to your text file
+            if (!response.ok) {
+                throw new Error("Failed to load text file");
+            }
+            window.wiki = await response.text(); // Convert response to text
+            console.log(`✅ Loaded Characters Database`);
 
-    } catch (error) {
-        console.error("Error loading text:", error);
+        } catch (error) {
+            console.error("Error loading text:", error);
+        }
+    }
+    if (!dB_Remote) {
+
+
+        // read local database for faster load times and lower network requirements
+        window.wiki = readFileSync("./public/Dystopia characters bio.txt", "utf-8");
+        console.log(`✅ Loaded Characters Database 2`); // Check if the data loads correctly
+
     }
 }
 
@@ -658,40 +684,59 @@ export function renderWiKi() {
 }
 
 async function loadGameCollection() {
-    try {
-        const response = await fetch("/data/games.json"); // Adjust path if necessary
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
+    if (dB_Remote) {
+        // Remote Fetch database from backend with Async
+        try {
+            const response = await fetch("/data/games.json"); // Adjust path if necessary
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json(); // Parse JSON
+
+            window.gamesCollection = data
+            console.log(`✅ Loaded Games Database 1`); // Check if the data loads correctly
+
+        } catch (error) {
+            console.error("Error loading games collection:", error);
         }
-        const data = await response.json(); // Parse JSON
-        //console.log(data); // Check if data is correctly fetched
+    }
 
-        // Store it in mangaCollection
-        //const mangaCollection2 = data;
-
-        window.gamesCollection = data
-
-        // Use mangaCollection as needed
-        //console.log(mangaCollection2);
-    } catch (error) {
-        console.error("Error loading games collection:", error);
+    if (!dB_Remote) {
+        // read local database for faster load times and lower network requirements
+        window.gamesCollection = JSON.parse(readFileSync("./data/games.json", "utf-8"));
+        console.log(`✅ Loaded Games Database 2`); // Check if the data loads correctly
     }
 }
 
 
 async function loadShopItems() {
-    try {
-        const response = await fetch("/data/shop.json"); // Adjust path if necessary
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
+    if (dB_Remote) {
+
+        // Load Remote Database
+
+        try {
+            const response = await fetch("/data/shop.json"); // Adjust path if necessary
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json(); // Parse JSON
+
+            window.shopItems = data;
+            console.log(`✅ Loaded Shop Database 1`); // Check if the data loads correctly
+
+        } catch (error) {
+            console.error("Error loading manga collection:", error);
         }
-        const data = await response.json(); // Parse JSON
-
-        window.shopItems = data
-
-    } catch (error) {
-        console.error("Error loading manga collection:", error);
     }
+
+    if (!dB_Remote) {
+
+        // read local database for faster load times and lower network requirements
+        window.shopItems = JSON.parse(readFileSync("./data/games.json", "utf-8"));
+        console.log(`✅ Loaded Shop Database 2`); // Check if the data loads correctly
+    }
+
+
 }
 
 

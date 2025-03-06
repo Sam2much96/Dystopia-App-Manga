@@ -1,4 +1,11 @@
-Here’s a step-by-step action plan to improve your Dystopia App Manga site for AdSense, SEO, and fast rendering on Netlify:
+📌 Functions:
+1️⃣ Auto generates static manga pages in html for each entry in the manga database.
+2️⃣ Set up a Netlify function (render.js) to dynamically serve HTML.
+
+
+
+
+Recent Updates that improve your Dystopia App Manga site for AdSense, SEO, and fast rendering on Netlify:
 ✅ Step 1: Enable Static & Dynamic Rendering
 
 🔹 Pre-render important manga pages as static HTML (faster for crawlers).
@@ -76,3 +83,15 @@ Test Build Locally Befor Deploying
 Test A Deploy without affecting Production
 `netlify deploy --build --draft`
 
+Run functions locally	`netlify dev`
+List available functions	`netlify functions:list`
+Test GET function	`curl http://localhost:8888/.netlify/functions/<function-name>`
+Test POST function	`curl -X POST http://localhost:8888/.netlify/functions/<function-name> -d '{}'`
+Debug logs	`netlify dev --debug`
+Serve only functions	`netlify functions:serve`
+Deploy for testing	`netlify deploy --build --draft`
+
+
+How to Build & Test
+
+Run `npm run generate && npx netlify dev --verbose`

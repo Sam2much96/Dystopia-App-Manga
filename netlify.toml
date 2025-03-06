@@ -1,8 +1,18 @@
 [build]
   functions = "netlify/functions"
+  command = "npm run generate"  # Runs generate scripts before deployment for static pages & sitemap generation
 
 [[redirects]]
   from = "/manga/chapter-:chapter"
   to = "/.netlify/functions/renderPage?chapter=:chapter"
   status = 200
   force = true
+  
+
+[[redirects]]  
+  from = "/assets/*" # server /asset file like /public
+  to = "/assets/:splat"
+  status = 200
+
+[functions]
+node_bundler = "esbuild"

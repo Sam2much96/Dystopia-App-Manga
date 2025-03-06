@@ -1,5 +1,10 @@
 {
   "dependencies": {
     "netlify-cli": "^19.0.2"
-  }
+  },
+  "scripts": {
+    "generate": "node scripts/generate-pages.js && node scripts/generate-sitemap.js",
+    "build": "npm run generate"
+  },
+  "type": "module"
 }
