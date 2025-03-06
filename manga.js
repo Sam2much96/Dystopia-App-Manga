@@ -20,25 +20,7 @@
  * To Do
  * (1) Proper State Management Using a simple state machine
  * (2) Fix Ads Code in header
- * (3) Add New Tag for recent updates
- */
-
-
-
-
-
-/**
- * Manga DataBase
- * 
- * Features:
- * (1) Manga Collection Database
- * (2) Used for Rendering The Landing Page Manga List & Manga Cards
- * 
- * TO Do:
- * (1) Optimize database for faster load times (done)
- * 
- * 
- * 
+ * (3) Add New Tag for recent updates (1/2)
  */
 
 
@@ -66,9 +48,9 @@ const shop = document.getElementById("shop");
 
 
 // State Management
-let currentManga = null;
-let currentChapter = null;
-let currentPageIndex = 0;
+window.currentManga = null; // preserves current manga read state
+var currentChapter = null;
+var currentPageIndex = 0;
 
 
 // Image Header carusoel Interactivity for pause on hover
@@ -281,9 +263,9 @@ export function renderWhitePaperRoadMap() {
     `;
 }
 
-function showLoadingAnimation() {
-    //show loading animation for pages that a still loading with css + png image rotations
-}
+//function showLoadingAnimation() {
+//show loading animation for pages that a still loading with css + png image rotations
+//}
 
 export function detectBrowser() {
     /**
@@ -339,7 +321,7 @@ export function showChapters(manga) {
      */
     console.log("Show Chapters");
 
-    currentManga = manga;
+    window.currentManga = manga;
 
     //turn off image carousel
     setCarouselVisibility(false);
@@ -374,7 +356,7 @@ export function showChapters(manga) {
 
 // Show Manga Reader
 export function showReader(chapterNumber) {
-    const chapter = currentManga.chapters.find(c => c.number === chapterNumber);
+    const chapter = window.currentManga.chapters.find(c => c.number === chapterNumber);
     currentChapter = chapter;
     currentPageIndex = 0;
 
@@ -445,12 +427,12 @@ export function renderPage() {
     //window.platform = "Mobile"
 
     // Desktop View
-    if (window.platform === "Desktop") {
-        const currentPage = currentChapter.pages[currentPageIndex];
 
-        // Modifies the site via Inner HTML
-        mangaReader.innerHTML = `
-                <button class="btn" onclick="showChapters(currentManga)">← Back to Chapters</button>
+    const currentPage = currentChapter.pages[currentPageIndex];
+
+    // Modifies the site via Inner HTML
+    mangaReader.innerHTML = `
+                <button class="btn" onclick="showChapters(window.currentManga)">← Back to Chapters</button>
                 <h2>Chapter ${currentChapter.number}: ${currentChapter.title}</h2>
                 <div class="navigation">
                     <button class="btn" onclick="prevPage()" ${currentPageIndex === 0 ? 'disabled' : ''}>
@@ -466,20 +448,20 @@ export function renderPage() {
                 </div>
             `;
 
-        // Add AdSense only on the last page
-        if (currentPageIndex === currentChapter.pages.length - 1) {
-            insertAds();
-        }
-
-        // Turn off AdSense only any other page
-        if (currentPageIndex !== currentChapter.pages.length - 1) {
-            setAdsVisibility(false);
-        }
-
-
+    // Add AdSense only on the last page
+    if (currentPageIndex === currentChapter.pages.length - 1) {
+        insertAds();
     }
 
+    // Turn off AdSense only any other page
+    if (currentPageIndex !== currentChapter.pages.length - 1) {
+        setAdsVisibility(false);
+    }
+
+
+
     // Mobile VIew
+    /**
     if (window.platform === "Mobile") {
         console.log("Rendering Webtoon Layout");
 
@@ -495,29 +477,30 @@ export function renderPage() {
     `;
 
         insertAds();
+        */
 
-        // Add double-click zoom functionality
-        // using css scale transfrom
-        const readerImage = document.getElementById("mangaPages");
-        let isZoomed = false;
+    // Add double-click zoom functionality
+    // using css scale transfrom
+    const readerImage = document.getElementById("readerImage");
+    let isZoomed = false;
 
-        readerImage.addEventListener("dblclick", () => {
-            isZoomed = !isZoomed;
-            if (isZoomed) {
-                readerImage.style.transform = "scale(2) translateY(1000px)";  // Zoom in and move down
-                readerImage.style.cursor = "zoom-out";
-            } else {
-                readerImage.style.transform = "scale(1) translateY(0)";  // Reset to normal
-                readerImage.style.cursor = "zoom-in";
-            }
-        });
+    readerImage.addEventListener("dblclick", () => {
+        isZoomed = !isZoomed;
+        if (isZoomed) {
+            readerImage.style.transform = "scale(2) translateY(10px)";  // Zoom in and move down
+            readerImage.style.cursor = "zoom-out";
+        } else {
+            readerImage.style.transform = "scale(1) translateY(0)";  // Reset to normal
+            readerImage.style.cursor = "zoom-in";
+        }
+    });
 
-        // Apply CSS for smooth zoom effect
-        readerImage.style.transition = "transform 0.3s ease";
-        readerImage.style.cursor = "zoom-in";  // Initial cursor state
-    }
-
+    // Apply CSS for smooth zoom effect
+    readerImage.style.transition = "transform 0.3s ease";
+    readerImage.style.cursor = "zoom-in";  // Initial cursor state
 }
+
+
 
 
 export function renderGamesList() {
@@ -724,7 +707,10 @@ window.renderMangaList = renderMangaList;
 window.renderShop = renderShop;
 window.renderWhitePaperRoadMap = renderWhitePaperRoadMap;
 window.renderWiKi = renderWiKi;
-
+window.showReader = showReader;
+window.showChapters = showChapters;
+window.nextPage = nextPage;
+window.prevPage = prevPage;
 
 
 
