@@ -732,10 +732,11 @@ async function loadShopItems() {
 
 
 // Load Database from json
-//await loadMangaCollection(); // disabled if favour of static page rendering refactor
+await loadMangaCollection(); // disabled if favour of static page rendering refactor
 await loadGameCollection();
 await loadShopItems();
 await loadCharacterBio();
+
 
 // Attach functions to `window` to make them available in the global scope
 window.renderGamesList = renderGamesList;
@@ -752,7 +753,8 @@ window.prevPage = prevPage;
 
 // Load Landing page
 // sHould be rewritten as dynic funcitions for newr mangas
-// renderMangaList();
+renderMangaList();
 
 // Debug Browser type
 detectBrowser();
+

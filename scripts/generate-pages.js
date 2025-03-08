@@ -52,9 +52,16 @@ mangaDatabase.forEach(({ id, title, description, genre, chapters }) => {
             <link rel="stylesheet" href="../../../styles.css">
 
         </head>
+        <header>
+            <div>
+                <img src="../../../assets/misc/coins silver.webp" alt="Logo" class="title-logo">
+    
+
+                <a href="../../../index.html" class="btn">← Back to Manga List</a>
+            </div>
+        </header>
         <body>
-            <a href="../../../index.html" class="btn">← Back to Manga List</a>
-            
+    
             <h2>${title}</h2>
             <p>${description}</p>
             
