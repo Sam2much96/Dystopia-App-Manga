@@ -146,6 +146,19 @@ header {
     /* Slight effect on hover for better UX */
 }
 
+.privacy-link {
+    text-decoration: none;
+    /* Removes underline */
+    color: rgb(255, 255, 255);
+    /* Sets font color to black */
+
+    /* Ensures the link covers the whole card */
+}
+
+.privacy-link:hover {
+    opacity: 0.5
+}
+
 #chapterList,
 #mangaReader {
     background: white;
