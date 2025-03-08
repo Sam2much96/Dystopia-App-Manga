@@ -29,12 +29,62 @@ const __dirname = dirname(__filename);
 const outputDir = join(__dirname, "../dist", "manga");
 
 
+// Generate chapterlist
+
+
+
+// Generate Manga Pages
 // Iterate through each manga and its chapters & generate static pages for each object
 mangaDatabase.forEach(({ id, title, description, genre, chapters }) => {
-    chapters.forEach(({ number, pages }) => {
+    // Determine the last chapter number to mark it as "new"
+    const lastChapterNumber = chapters.length > 0 ? chapters[chapters.length - 1].number : null;
+
+    // Generate Chapter List Page
+    const chapterListHTML = `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta name="description" content="Read all chapters of ${title}.">
+            <meta name="keywords" content="${genre.join(", ")}, ${title}, Manga">
+            <title>${title} - Chapter List</title>
+            <link rel="stylesheet" href="../../../styles.css">
+
+        </head>
+        <body>
+            <a href="../../../index.html" class="btn">← Back to Manga List</a>
+            
+            <h2>${title}</h2>
+            <p>${description}</p>
+            
+            <div id="chapterList" style="display: block;">
+                ${chapters.map(({ number, title: chapterTitle }) => `
+                    <div class="chapter-item">
+                        <a href="./chapter-${number}.html">Chapter ${number}: ${chapterTitle}</a>
+                        ${number === lastChapterNumber ? '<span class="new-icon">new</span>' : ''}
+                    </div>
+                `).join("\n")}
+            </div>
+        </body>
+        </html>
+    `;
+
+    const chapterListPath = join(outputDir, id.toString(), "chapterlist.html");
+    mkdirSync(dirname(chapterListPath), { recursive: true });
+    writeFileSync(chapterListPath, chapterListHTML, "utf8");
+    console.log(`✅ Generated: ${chapterListPath}`);
+
+    // Generates Chapter Pages
+    chapters.forEach(({ number, pages }, index) => {
         const chapterTitle = `Chapter ${number} - ${title}`;
         const keywords = [...genre, title, `Chapter ${number}`].join(", ");
         const firstPage = pages[0] || "default-thumbnail.jpg";
+
+        // Determine the next chapter link (if exists)
+        const nextChapter = chapters[index + 1]; // Get next chapter
+        const nextChapterLink = nextChapter ? `chapter-${nextChapter.number}.html` : "../../../index.html";
+        const nextChapterText = nextChapter ? `Next Chapter →` : `← Back to Manga List`;
 
         const html = `
             <!DOCTYPE html>
@@ -49,6 +99,7 @@ mangaDatabase.forEach(({ id, title, description, genre, chapters }) => {
                 <meta property="og:description" content="${description}">
                 <meta property="og:image" content="../../../${firstPage}">
                 <meta property="og:type" content="website">
+                <link rel="stylesheet" href="../../../styles.css">
                 <style>
                     body { font-family: Arial, sans-serif; text-align: center; }
                     img { max-width: 80%; height: auto; display: block; margin: 10px auto; }
@@ -56,8 +107,13 @@ mangaDatabase.forEach(({ id, title, description, genre, chapters }) => {
             </head>
             <body>
                 <h1>${chapterTitle}</h1>
-                <p>${description}</p>
+                <a href="./chapterlist.html" class="btn">← Back to Chapter List</a>
+
                 ${pages.map(page => `<img src="../../../${page}" alt="${chapterTitle}">`).join("\n")}
+
+                <div class="nav-buttons">
+                    <a href="${nextChapterLink}" class="btn">${nextChapterText}</a>
+                </div>
             </body>
             </html>
         `;

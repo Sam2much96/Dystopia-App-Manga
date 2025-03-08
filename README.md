@@ -99,3 +99,139 @@ Run `npm run generate && npx netlify dev --verbose`
 
 API Database
 call `https://dystopia-app.site/api/manga` to fetch securely manga database for the side as json
+
+
+🖼️ Dynamic Resizing
+
+Dynamic resizing is the process of modifying images on the fly before delivering them to the user. Instead of storing multiple versions of the same image in different sizes, a server or image processing service resizes the image dynamically based on the request.
+🔍 Example of Dynamic Resizing in Action
+
+Imagine you have a manga cover stored as:
+https://example.com/manga/dystopia_app/cover.png
+Without Dynamic Resizing (Static)
+
+    You must manually create and store multiple versions of the image:
+        Full size: cover-large.png (1200px)
+        Medium size: cover-medium.png (600px)
+        Thumbnail: cover-small.png (150px)
+    This takes up more storage and slows down deployment.
+
+With Dynamic Resizing
+
+    The server automatically resizes the image when requested.
+    Instead of storing different versions, you can request on-the-fly resizing:
+
+https://example.com/manga/dystopia_app/cover.png?width=600
+
+    If a user requests width=600, the server sends back an optimized 600px-wide version.
+    This reduces bandwidth and improves page speed.
+
+
+
+🌍 Implementing Multilingual Support Without Duplicating/Modifying Images
+
+If you want to add multiple languages to your manga site without duplicating images, you can apply a similar approach to dynamic resizing, but for text overlays and metadata instead of images.
+🔥 Best Approaches for Multilingual Support (Without Image Duplication)
+1️⃣ Dynamic Text Overlays (Server-Side Image Processing)
+
+    Instead of modifying images, use a serverless function (Netlify, Cloudflare Workers) or an image CDN (Cloudinary, Imgix, etc.) to overlay translated text dynamically onto existing images.
+    The image remains the same, but the text is added on request based on the user's language preference.
+
+Example (Cloudinary Dynamic Overlay)
+
+<img src="https://res.cloudinary.com/demo/image/upload/l_text:Arial_50:Hola!/manga/dystopia_app/cover.png" />
+
+    The URL dynamically overlays "Hola!" onto the existing image without modifying the original file.
+
+2️⃣ JSON-Based Translations + Client-Side Overlay
+
+    Instead of modifying images, store translated text separately in JSON files and overlay it using CSS or JavaScript.
+    This is lightweight and fast, requiring no image duplication.
+
+Example JSON Translation File (translations.json)
+
+{
+  "en": {
+    "title": "Dystopia App",
+    "description": "You are a Fourth Worlder, Survive!"
+  },
+  "es": {
+    "title": "Aplicación Distópica",
+    "description": "Eres un Cuarto Mundialista, ¡Sobrevive!"
+  }
+}
+
+How to Use It in JavaScript
+
+async function loadTranslation(lang) {
+    const res = await fetch("/data/translations.json");
+    const translations = await res.json();
+    document.getElementById("title").innerText = translations[lang].title;
+    document.getElementById("description").innerText = translations[lang].description;
+}
+
+// Detect user language or default to English
+const userLang = navigator.language.startsWith("es") ? "es" : "en";
+loadTranslation(userLang);
+
+🔹 Advantages:
+✅ No image modification needed.
+✅ Works without server-side processing.
+✅ Lightweight & SEO-friendly when paired with prerendering.
+3️⃣ URL-Based Language Switching (SEO-Friendly)
+
+    Use URL parameters (?lang=es) or subdirectories (/es/manga/dystopia_app/).
+    This tells search engines that multiple language versions exist.
+
+Example URL Structure
+
+https://example.com/manga/dystopia_app/ (Default English)
+https://example.com/es/manga/dystopia_app/ (Spanish Version)
+
+How It Works:
+
+    Store all text separately in a JSON or database.
+    Serve the same images, but dynamically load the translated text based on the URL.
+    Use hreflang meta tags to tell search engines about different language versions.
+
+Example HTML Meta Tag for SEO
+
+<link rel="alternate" hreflang="en" href="https://example.com/manga/dystopia_app/" />
+<link rel="alternate" hreflang="es" href="https://example.com/es/manga/dystopia_app/" />
+
+4️⃣ Server-Side Rendering with Netlify Functions
+
+    Instead of using JavaScript to replace text after the page loads, prerender the correct language using a Netlify function.
+
+Example Netlify Function (getManga.js)
+
+export async function handler(event) {
+    const lang = event.queryStringParameters.lang || "en";
+    const translations = {
+        en: { title: "Dystopia App", description: "You are a Fourth Worlder, Survive!" },
+        es: { title: "Aplicación Distópica", description: "Eres un Cuarto Mundialista, ¡Sobrevive!" }
+    };
+
+    return {
+        statusCode: 200,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(translations[lang])
+    };
+}
+
+🔹 How It Works:
+
+    Fetches the correct language before rendering the page.
+    Works well with static page generation.
+
+🚀 Which Approach is Best for You?
+Approach	Pros	Cons
+Dynamic Text Overlays (Cloudinary, Sharp.js)	No image duplication, works on any device	Needs an image processing server/CDN
+JSON-Based Translation (Client-Side JavaScript)	Fast, easy, SEO-friendly with prerendering	Requires JavaScript to display translations
+URL-Based Language Switching (/es/manga/...)	Best for SEO, fully static	Requires separate URLs per language
+Server-Side Rendering (Netlify Functions, API Calls)	Fully dynamic, no JS needed	Slightly slower, needs a backend
+🎯 Best Combination for Your Manga Site
+
+    For SEO & Performance: Use URL-based language switching (/es/manga/...) with hreflang meta tags.
+    For Simplicity: Use JSON-based translations with client-side JavaScript.
+    For Image-Heavy Content: Use dynamic text overlays with Cloudinary or a Netlify Function.

@@ -5,12 +5,6 @@ import { writeFileSync, readFileSync } from 'fs';
 const baseUrl = "https://dystopia-app.site";
 const lastMod = new Date().toISOString().split('T')[0]; // Today's date
 
-//const mangaChapters = [
-//    { id: "onepiece", chapter: "1010" },
-//    { id: "naruto", chapter: "500" },
-//    { id: "bleach", chapter: "700" },
-//];
-
 const mangaDatabase = JSON.parse(readFileSync("./data/manga.json", "utf-8"));
 
 
@@ -36,6 +30,14 @@ mangaDatabase.forEach(({ id, title, chapters }) => {
         <loc>${baseUrl}/manga/${mangaSlug}</loc>
         <lastmod>${lastMod}</lastmod>
         <priority>0.9</priority>
+    </url>`;
+
+    // Add chapter list page
+    sitemapContent += `
+    <url>
+        <loc>${baseUrl}/manga/${mangaSlug}/chapterlist.html</loc>
+        <lastmod>${lastMod}</lastmod>
+        <priority>0.85</priority>
     </url>`;
 
     // Add chapter pages

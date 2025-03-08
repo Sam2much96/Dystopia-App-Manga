@@ -21,6 +21,10 @@
  * (1) Proper State Management Using a simple state machine
  * (2) Fix Ads Code in header
  * (3) Add New Tag for recent updates (1/2)
+ * 
+ * 
+ * Bugs:
+ * (1) Using static pages clears the global window state reloading the database from scratch whenever on the landing page
  */
 
 
@@ -316,11 +320,13 @@ export function detectBrowser() {
 
 
 
-
+// Depreciated
 export function showChapters(manga) {
     /**
      * Show Chapters for a Manga
-     *
+     * 
+     * Depreciated on landing page
+     * Rewriting as pregeneratd html functions + static links
      *
      */
     console.log("Show Chapters");
@@ -358,7 +364,9 @@ export function showChapters(manga) {
     `;
 }
 
+
 // Show Manga Reader
+// Need Refactoring for serverless function use
 export function showReader(chapterNumber) {
     const chapter = window.currentManga.chapters.find(c => c.number === chapterNumber);
     currentChapter = chapter;
@@ -551,7 +559,8 @@ function prevPage() {
 //double tap to zoom in / out
 
 async function loadMangaCollection() {
-    if (dB_Remote) {
+
+    if (dB_Remote && window.mangaCollection == null) {
         // Load Remote Database Data Slower
         try {
             const response = await fetch("/data/manga.json"); // Adjust path if necessary
@@ -572,7 +581,7 @@ async function loadMangaCollection() {
         }
     }
 
-    if (!dB_Remote) {
+    if (!dB_Remote && window.mangaCollection == null) {
         // Load Local database securely, slower with some processing and cache
 
         // read local database for faster load times and lower network requirements
@@ -595,24 +604,26 @@ async function loadMangaCollection() {
 
 async function loadCharacterBio() {
 
-    try {
-        const response = await fetch("/data/Dystopia characters bio.txt"); // Path to your text file
-        if (!response.ok) {
-            throw new Error("Failed to load text file");
+    if (window.wiki == null) {
+        try {
+            const response = await fetch("/data/Dystopia characters bio.txt"); // Path to your text file
+            if (!response.ok) {
+                throw new Error("Failed to load text file");
+            }
+            window.wiki = await response.text(); // Convert response to text
+            console.log(`✅ Loaded Characters Database`);
+
+        } catch (error) {
+            console.error("Error loading text:", error);
         }
-        window.wiki = await response.text(); // Convert response to text
-        console.log(`✅ Loaded Characters Database`);
-
-    } catch (error) {
-        console.error("Error loading text:", error);
     }
-
 
 }
 
 
 // Home Screen & Landing Page
 // Render Manga List by modifying the Manga List Div in the Dom
+// modify code to add to the static mangalist by running some comparison logic with the database and staic pages
 export function renderMangaList() {
     console.log("Render Manga List Triggered ");
 
@@ -673,50 +684,55 @@ export function renderWiKi() {
 
 async function loadGameCollection() {
 
-    // Remote Fetch database from backend with Async
-    try {
-        const response = await fetch("/data/games.json"); // Adjust path if necessary
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
+    if (window.gamesCollection == null) {
+
+        // Remote Fetch database from backend with Async
+        try {
+            const response = await fetch("/data/games.json"); // Adjust path if necessary
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json(); // Parse JSON
+
+            window.gamesCollection = data
+            console.log(`✅ Loaded Games Database 1`); // Check if the data loads correctly
+
+        } catch (error) {
+            console.error("Error loading games collection:", error);
         }
-        const data = await response.json(); // Parse JSON
 
-        window.gamesCollection = data
-        console.log(`✅ Loaded Games Database 1`); // Check if the data loads correctly
-
-    } catch (error) {
-        console.error("Error loading games collection:", error);
     }
-
 
 }
 
 
 async function loadShopItems() {
 
-    // Load Remote Database
+    if (window.shopItems == null) {
 
-    try {
-        const response = await fetch("/data/shop.json"); // Adjust path if necessary
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
+        // Load Remote Database
+
+        try {
+            const response = await fetch("/data/shop.json"); // Adjust path if necessary
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json(); // Parse JSON
+
+            window.shopItems = data;
+            console.log(`✅ Loaded Shop Database 1`); // Check if the data loads correctly
+
+        } catch (error) {
+            console.error("Error loading manga collection:", error);
         }
-        const data = await response.json(); // Parse JSON
 
-        window.shopItems = data;
-        console.log(`✅ Loaded Shop Database 1`); // Check if the data loads correctly
-
-    } catch (error) {
-        console.error("Error loading manga collection:", error);
     }
-
-
 
 }
 
 
 // Load Database from json
-await loadMangaCollection();
+//await loadMangaCollection(); // disabled if favour of static page rendering refactor
 await loadGameCollection();
 await loadShopItems();
 await loadCharacterBio();
@@ -735,7 +751,8 @@ window.prevPage = prevPage;
 
 
 // Load Landing page
-renderMangaList();
+// sHould be rewritten as dynic funcitions for newr mangas
+// renderMangaList();
 
 // Debug Browser type
 detectBrowser();
