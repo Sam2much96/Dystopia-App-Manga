@@ -20,22 +20,23 @@ let sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
         <priority>1.0</priority>
     </url>`;
 
-
-mangaDatabase.forEach(({ id, title, chapters }) => {
-    const mangaSlug = title.toLowerCase().replace(/\s+/g, "-"); // Convert title to URL slug
-
-    // Add main manga page
-    sitemapContent += `
+// Add main manga page
+sitemapContent += `
     <url>
-        <loc>${baseUrl}/manga/${mangaSlug}</loc>
+        <loc>${baseUrl}/index.html</loc>
         <lastmod>${lastMod}</lastmod>
         <priority>0.9</priority>
     </url>`;
 
+mangaDatabase.forEach(({ id, title, chapters }) => {
+    //const mangaSlug = title.toLowerCase().replace(/\s+/g, "-"); // Convert title to URL slug
+
+
+
     // Add chapter list page
     sitemapContent += `
     <url>
-        <loc>${baseUrl}/manga/${mangaSlug}/chapterlist.html</loc>
+        <loc>${baseUrl}/dist/manga/${id}/chapterlist.html</loc>
         <lastmod>${lastMod}</lastmod>
         <priority>0.85</priority>
     </url>`;
@@ -44,7 +45,7 @@ mangaDatabase.forEach(({ id, title, chapters }) => {
     chapters.forEach(({ number }) => {
         sitemapContent += `
     <url>
-        <loc>${baseUrl}/manga/${mangaSlug}/chapter/${number}</loc>
+        <loc>${baseUrl}/dist/manga/${id}/chapter-${number}.html</loc>
         <lastmod>${lastMod}</lastmod>
         <priority>0.8</priority>
     </url>`;
