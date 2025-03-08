@@ -1,6 +1,10 @@
+**Dystopia App Manga Website**
+
 📌 Functions:
 1️⃣ Auto generates static manga pages in html for each entry in the manga database.
 2️⃣ Set up a Netlify function (render.js) to dynamically serve HTML.
+(3) Static Manga Chapter Generator
+(4) Sitemap generator for manga and animated video content
 
 
 

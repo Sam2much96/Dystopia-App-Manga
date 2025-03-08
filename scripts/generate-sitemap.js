@@ -10,8 +10,8 @@ const mangaDatabase = JSON.parse(readFileSync("./data/manga.json", "utf-8"));
 
 console.log(`✅ Loaded Sitemap Database`); // Check if the data loads correctly
 
-const animeDatabase = JSON.parse(readFileSync("./data/anime.json", "utf-8"));
-console.log(`✅ Loaded Sitemap Database 2`); // Check if the data loads correctly
+//const animeDatabase = JSON.parse(readFileSync("./data/anime.json", "utf-8"));
+//console.log(`✅ Loaded Sitemap Database 2`); // Check if the data loads correctly
 
 
 
@@ -66,6 +66,7 @@ mangaDatabase.forEach(({ id, title, chapters }) => {
 
 // Add YouTube videos from anime.json
 // To DO: add video duration data to database
+/** 
 animeDatabase.forEach(({ title, description, thumbnail, videoUrl, videoId, duration }) => {
     sitemapContent += `
     <url>
@@ -83,7 +84,7 @@ animeDatabase.forEach(({ title, description, thumbnail, videoUrl, videoId, durat
         </video:video>
     </url>`;
 });
-
+*/
 
 sitemapContent += "\n</urlset>";
 
