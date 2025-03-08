@@ -53,6 +53,8 @@ const games = document.getElementById('games');
 const whitepaper = document.getElementById('whitepaper');
 const shop = document.getElementById("shop");
 
+//Video Div Elements
+const videoContainer = document.getElementById('videoGallery');
 
 
 // State Management
@@ -171,6 +173,18 @@ function setWiKiVisibility(isVisible) {
     }
 }
 
+function setAnimeVisibility(isVisible) {
+    {
+        // toggles the visibility of the games list
+        if (isVisible == true) {
+            videoContainer.classList.remove("hidden"); // Show the carousel
+        } else {
+            videoContainer.classList.add("hidden"); // Hide the carousel
+        }
+    }
+}
+
+
 function openUrl(url) {
 
     // open url to a new page
@@ -199,6 +213,7 @@ export function renderShop() {
     setWhitePaperVisibility(false);
     setShopVisibility(true);
     setWiKiVisibility(false);
+    setAnimeVisibility(false);
 
     shop.innerHTML = `    
     <h1>Shop</h1>
@@ -231,6 +246,7 @@ export function renderWhitePaperRoadMap() {
     setWhitePaperVisibility(true);
     setShopVisibility(false);
     setWiKiVisibility(false);
+    setAnimeVisibility(false);
 
     const whitepaperImg = "assets/misc/whitepaper.jpeg";
     const title = "the project's whitepaper and roadmap"
@@ -341,7 +357,7 @@ export function showChapters(manga) {
     setWhitePaperVisibility(false);
     setShopVisibility(false);
     setWiKiVisibility(false);
-
+    setAnimeVisibility(false);
 
     chapterList.style.display = 'block'; // change the styling of the website to full screen
 
@@ -382,6 +398,7 @@ export function showReader(chapterNumber) {
     setMangaReaderVisibility(true);
     setWiKiVisibility(false);
     setShopVisibility(false);
+    setAnimeVisibility(false);
 
     // make the manga reader full screen
     mangaReader.style.display = 'block';
@@ -472,7 +489,7 @@ export function renderPage() {
 
 
 
-    // Mobile VIew
+    // Mobile View
     // depreciated in favour of static pre-generated html chapters
 
 
@@ -517,6 +534,7 @@ export function renderGamesList() {
     setCarouselVisibility(true);
     setShopVisibility(false);
     setWiKiVisibility(false);
+    setAnimeVisibility(false);
     //console.log(games.style.display);
 
     //creates a Manga Card div for each element in the Manga Collection Constant
@@ -568,11 +586,6 @@ async function loadMangaCollection() {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             const data = await response.json(); // Parse JSON
-            //console.log(data); // Check if data is correctly fetched
-
-            // Store it in mangaCollection
-            //const mangaCollection2 = data;
-
             window.mangaCollection = data
 
             console.log(`✅ Loaded Manga Database 1`); // Check if the data loads correctly
@@ -621,66 +634,6 @@ async function loadCharacterBio() {
 }
 
 
-// Home Screen & Landing Page
-// Render Manga List by modifying the Manga List Div in the Dom
-// modify code to add to the static mangalist by running some comparison logic with the database and staic pages
-export function renderMangaList() {
-    console.log("Render Manga List Triggered ");
-
-    mangaList.innerHTML = '';
-
-    // Turn of chapter list & Manga Renders via css + js
-
-
-    setMangaListVisibility(true);
-    setChapterListVisibility(false);
-    setMangaReaderVisibility(false);
-    setGamesListVisibility(false);
-    setWhitePaperVisibility(false);
-    setCarouselVisibility(true);
-    setShopVisibility(false);
-    setWiKiVisibility(false);
-
-    //creates a Manga Card div for each element in the Manga Collection Constant
-    window.mangaCollection.forEach(manga => {
-
-        // create a manga card for each Manga
-        const mangaCard = document.createElement('div');
-        mangaCard.className = 'manga-card';
-        mangaCard.innerHTML = `
-                    <img src="${manga.coverImage}" alt="${manga.title}">
-                    <div class="manga-card-content">
-                        <h2>${manga.title}</h2>
-                        <p>${manga.genre.join(', ')}</p>
-                        <div>❤️ ${manga.likes} Likes</div>
-                    </div>
-                `; mangaCard.onclick = () => showChapters(manga); // map Card Div to show Chapters function
-
-        mangaList.appendChild(mangaCard);
-    });
-
-
-
-}
-
-export function renderWiKi() {
-    console.log("Characters List Render Triggered");
-
-    mangaList.innerHTML = '';
-
-    // Turn of chapter list & Manga Renders via css + js
-
-
-    setMangaListVisibility(false);
-    setChapterListVisibility(false);
-    setMangaReaderVisibility(false);
-    setGamesListVisibility(false);
-    setWhitePaperVisibility(false);
-    setCarouselVisibility(true);
-    setShopVisibility(false);
-    setWiKiVisibility(true);
-    wiki.innerText = window.wiki;
-}
 
 async function loadGameCollection() {
 
@@ -731,11 +684,144 @@ async function loadShopItems() {
 }
 
 
+
+async function loadAnimationDb() {
+
+
+
+    // Load Remote Database
+
+    try {
+        const response = await fetch("/data/anime.json"); // Adjust path if necessary
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json(); // Parse JSON
+
+        window.anime = data;
+        console.log(`✅ Loaded Animation Database`); // Check if the data loads correctly
+
+    } catch (error) {
+        console.error("Error loading Animation Database:", error);
+    }
+
+
+
+}
+
+
+
+// Home Screen & Landing Page
+// Render Manga List by modifying the Manga List Div in the Dom
+// modify code to add to the static mangalist by running some comparison logic with the database and staic pages
+export function renderMangaList() {
+    console.log("Render Manga List Triggered ");
+
+    mangaList.innerHTML = '';
+
+    // Turn of chapter list & Manga Renders via css + js
+
+
+    setMangaListVisibility(true);
+    setChapterListVisibility(false);
+    setMangaReaderVisibility(false);
+    setGamesListVisibility(false);
+    setWhitePaperVisibility(false);
+    setCarouselVisibility(true);
+    setShopVisibility(false);
+    setWiKiVisibility(false);
+    setAnimeVisibility(false);
+
+    //creates a Manga Card div for each element in the Manga Collection Constant
+    window.mangaCollection.forEach(manga => {
+
+        // create a manga card for each Manga
+        const mangaCard = document.createElement('div');
+        mangaCard.className = 'manga-card';
+        mangaCard.innerHTML = `
+                    <img src="${manga.coverImage}" alt="${manga.title}">
+                    <div class="manga-card-content">
+                        <h2>${manga.title}</h2>
+                        <p>${manga.genre.join(', ')}</p>
+                        <div>❤️ ${manga.likes} Likes</div>
+                    </div>
+                `; mangaCard.onclick = () => showChapters(manga); // map Card Div to show Chapters function
+
+        mangaList.appendChild(mangaCard);
+    });
+
+
+
+}
+
+
+export function renderAnimationList() {
+    console.log("render anime list triggered");
+
+    setMangaListVisibility(false);
+    setChapterListVisibility(false);
+    setMangaReaderVisibility(false);
+    setGamesListVisibility(false);
+    setWhitePaperVisibility(false);
+    setCarouselVisibility(true);
+    setShopVisibility(false);
+    setWiKiVisibility(false);
+    setAnimeVisibility(true);
+    // creates a video card for each element in the animation database
+    window.anime.forEach(video => {
+
+        const videoCard = document.createElement('div');
+        videoCard.classList.add('video-card');
+        //      document.getElementById("videoPlayer").innerHTML = `
+        //   <iframe width="560" height="315" src="${url}" frameborder="0" allowfullscreen></iframe>
+        // `;
+
+        videoCard.innerHTML = `
+       <iframe width="560" height="315" src="${video.videoUrl}" frameborder="0" allowfullscreen></iframe>
+
+      `;
+
+        videoContainer.appendChild(videoCard);
+    });
+
+}
+
+export function renderWiKi() {
+    console.log("Characters List Render Triggered");
+
+    //mangaList.innerHTML = '';
+
+    // Turn of chapter list & Manga Renders via css + js
+
+
+    setMangaListVisibility(false);
+    setChapterListVisibility(false);
+    setMangaReaderVisibility(false);
+    setGamesListVisibility(false);
+    setWhitePaperVisibility(false);
+    setCarouselVisibility(true);
+    setShopVisibility(false);
+    setWiKiVisibility(true);
+    setAnimeVisibility(false);
+    wiki.innerText = window.wiki;
+}
+
+
+// Function to open the video in an iframe
+export function playVideo(url) {
+    //document.getElementById("videoPlayer").innerHTML = `
+    //<iframe width="560" height="315" src="${url}" frameborder="0" allowfullscreen></iframe>
+    //`;
+
+}
+
 // Load Database from json
+await loadAnimationDb();
 await loadMangaCollection(); // disabled if favour of static page rendering refactor
 await loadGameCollection();
 await loadShopItems();
 await loadCharacterBio();
+
 
 
 // Attach functions to `window` to make them available in the global scope
@@ -748,11 +834,11 @@ window.showReader = showReader;
 window.showChapters = showChapters;
 window.nextPage = nextPage;
 window.prevPage = prevPage;
-
-
+window.renderAnimationList = renderAnimationList;
+window.playVideo = playVideo;
 
 // Load Landing page
-// sHould be rewritten as dynic funcitions for newr mangas
+// SHould be rewritten as dynic funcitions for newr mangas
 renderMangaList();
 
 // Debug Browser type

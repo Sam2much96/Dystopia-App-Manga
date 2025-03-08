@@ -410,3 +410,23 @@ footer a {
 .download-btn:hover {
     background-color: #feab2f;
 }
+
+.video-card {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    display: inline-block;
+    width: 300px;
+}
+
+.video-card img {
+    width: 100%;
+    cursor: pointer;
+}
+
+iframe {
+    width: 100%;
+    max-width: 560px;
+    height: 315px;
+}

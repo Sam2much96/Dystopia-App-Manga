@@ -1,0 +1,56 @@
+[
+    {
+        "id": 1,
+        "title": "Dystopia Animation Episode Pilot",
+        "description": "Episode 1 : Dystopia animation series Nigerian Edit.",
+        "thumbnail": "https://img.youtube.com/vi/oJY1rIxC4kk/hqdefault.jpg",
+        "videoUrl": "https://www.youtube.com/embed/oJY1rIxC4kk",
+        "videoId": "oJY1rIxC4kk",
+        "duration": 420
+    },
+    {
+        "id": 2,
+        "title": "Episode 1 : Dystopia Animated Series Short",
+        "description": "Episode 1: Dystopia Animatoin Shorts",
+        "thumbnail": "https://img.youtube.com/vi/BjjU6sRYzI0/hqdefault.jpg",
+        "videoUrl": "https://www.youtube.com/embed/BjjU6sRYzI0",
+        "videoId": "BjjU6sRYzI0",
+        "duration": 120
+    },
+    {
+        "id": 3,
+        "title": "Doggo Toons AMV",
+        "description": "A New Cartoon Series about a troublesome doggo",
+        "thumbnail": "https://img.youtube.com/vi/HeVMep_V9AA/hqdefault.jpg",
+        "videoUrl": "https://www.youtube.com/embed/HeVMep_V9AA",
+        "videoId": "HeVMep_V9AA",
+        "duration": 120
+    },
+    {
+        "id": 4,
+        "title": "Dystopia Animation Episode 2 Remaster",
+        "description": "Episode 2 : Dystopia Animation Remaster",
+        "thumbnail": "https://img.youtube.com/vi/1uCnBV8EfCA/hqdefault",
+        "videoUrl": "https://www.youtube.com/embed/1uCnBV8EfCA",
+        "videoId": "1uCnBV8EfCA",
+        "duration": 120
+    },
+    {
+        "id": 5,
+        "title": "Dystopia Animation Episode 1 Remaster",
+        "description": "Episode 2 : Dystopia Animation Remaster",
+        "thumbnail": "https://img.youtube.com/vi/MUsYDbsMZAk/hqdefault",
+        "videoUrl": "https://www.youtube.com/embed/MUsYDbsMZAk",
+        "videoId": "MUsYDbsMZAk",
+        "duration": 120
+    },
+    {
+        "id": 6,
+        "title": "Dystopia Animation Episode 3 Remaster",
+        "description": "Episode 3 : Dystopia Animation Remaster",
+        "thumbnail": "https://img.youtube.com/vi/CRrxY6CVLGo/hqdefault",
+        "videoUrl": "https://www.youtube.com/embed/CRrxY6CVLGo",
+        "videoId": "CRrxY6CVLGo",
+        "duration": 120
+    }
+]

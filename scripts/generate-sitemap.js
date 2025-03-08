@@ -8,7 +8,10 @@ const lastMod = new Date().toISOString().split('T')[0]; // Today's date
 const mangaDatabase = JSON.parse(readFileSync("./data/manga.json", "utf-8"));
 
 
-console.log(`✅ Loaded Sitemap Database: ${mangaDatabase}`); // Check if the data loads correctly
+console.log(`✅ Loaded Sitemap Database`); // Check if the data loads correctly
+
+const animeDatabase = JSON.parse(readFileSync("./data/anime.json", "utf-8"));
+console.log(`✅ Loaded Sitemap Database 2`); // Check if the data loads correctly
 
 
 
@@ -24,6 +27,14 @@ let sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
 sitemapContent += `
     <url>
         <loc>${baseUrl}/index.html</loc>
+        <lastmod>${lastMod}</lastmod>
+        <priority>0.4</priority>
+    </url>`;
+
+//add privacy policy
+sitemapContent += `
+    <url>
+        <loc>${baseUrl}/policy.html</loc>
         <lastmod>${lastMod}</lastmod>
         <priority>0.9</priority>
     </url>`;
@@ -50,6 +61,27 @@ mangaDatabase.forEach(({ id, title, chapters }) => {
         <priority>0.8</priority>
     </url>`;
     });
+});
+
+
+// Add YouTube videos from anime.json
+// To DO: add video duration data to database
+animeDatabase.forEach(({ title, description, thumbnail, videoUrl, videoId, duration }) => {
+    sitemapContent += `
+    <url>
+        <loc>${baseUrl}/anime</loc> 
+        <video:video>
+            <video:thumbnail_loc>${thumbnail}</video:thumbnail_loc>
+            <video:title>${title}</video:title>
+            <video:description>${description}</video:description>
+            <video:content_loc>https://www.youtube.com/watch?v=${videoId}</video:content_loc>
+            <video:player_loc>${videoUrl}</video:player_loc>
+            <video:duration>${duration}</video:duration> 
+            <video:publication_date>${lastMod}</video:publication_date>
+            <video:category>Animation</video:category>
+            <video:uploader>Inhumanity Studios</video:uploader>
+        </video:video>
+    </url>`;
 });
 
 
