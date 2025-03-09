@@ -1,3 +1,6 @@
+# This script Handles all url redirects in my website
+# This logic is used by Netlify Server
+
 # 1️⃣ Serve Pre-Rendered Static Manga Pages from /dist/
 # Example: /manga/onepiece/chapter/1010 → /dist/manga/onepiece/chapter-1010.html
 /manga/:mangaId/chapter/:chapter /dist/manga/:mangaId/chapter-:chapter.html 200
@@ -11,3 +14,6 @@
 
 # 4️⃣ Serve Sitemap for AdSense & SEO
 /sitemap.xml /sitemap.xml 200
+
+# RedirectAds.txt to Ezoic Ads txt manager
+/ads.txt https://srv.adstxtmanager.com/19390/dystopia-app.site 200!

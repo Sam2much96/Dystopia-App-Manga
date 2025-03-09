@@ -20,5 +20,11 @@
   status = 200
 
 
+[[redirects]]
+  from = "/ads.txt"
+  to = "https://srv.adstxtmanager.com/19390/dystopia-app.site"
+  status = 200
+  force = true
+
 [functions]
 node_bundler = "esbuild"
