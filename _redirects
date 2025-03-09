@@ -1,0 +1,13 @@
+# 1️⃣ Serve Pre-Rendered Static Manga Pages from /dist/
+# Example: /manga/onepiece/chapter/1010 → /dist/manga/onepiece/chapter-1010.html
+/manga/:mangaId/chapter/:chapter /dist/manga/:mangaId/chapter-:chapter.html 200
+
+# 2️⃣ Fallback to Netlify Function for Dynamic Pages
+# If no static file exists, render it dynamically
+/manga/:mangaId/chapter/:chapter /.netlify/functions/render 200
+
+# 3️⃣ Redirect Root Requests to Main Page
+/ /index.html 200
+
+# 4️⃣ Serve Sitemap for AdSense & SEO
+/sitemap.xml /sitemap.xml 200

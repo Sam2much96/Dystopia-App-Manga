@@ -1,7 +1,7 @@
 /**
  * Renders Pages Dynamically Using Netlify's Serverless functions
  * Used for less popular/ new manga uploads
- * Is slower than generated static pages
+ * Is slower than generated static pages 
  * 
  * @param {*} event 
  * @returns 
@@ -10,7 +10,19 @@
 export async function handler(event, context) {
     console.log("Serverless func debug: ", event);
     const { path } = event;
+    
+    
+    
+    // REgex Logic
+    /**
+     * ✅ Matches the manga name (e.g., "one-piece", "naruto", "attack-on-titan").
+        Example URL	Captured Value
+        /manga/one-piece/chapter/10	"one-piece"
+        /manga/naruto/chapter/5	"naruto"
+     */
+    
     const match = path.match(/\/manga\/([^/]+)\/chapter\/(\d+)/);
+
 
     if (!match) {
         return {
