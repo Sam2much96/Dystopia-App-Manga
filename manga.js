@@ -406,19 +406,26 @@ export function showReader(chapterNumber) {
     renderPage();
 }
 
-function insertAds() {
+export function insertAds() {
     /**
      * Insert Adsense Ads Into Final Pages
      * 
      * called in render page function
      * inserts ads on the last page of the manga chapter
      * Replace "YOUR_AD_SLOT" with your actual AdSense ad slot ID. 
+     * 
+     * Ezoic Ads Documentation
+     * 
+     * https://docs.ezoic.com/docs/ezoicads/dynamic-content/
      *
      */
 
 
     console.log("inserting ads");
     setAdsVisibility(true);
+
+    //adsense ads are depreciated
+    /** 
     adsContainer.innerHTML = `
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3900377589557710"
      crossorigin="anonymous"></script>
@@ -433,6 +440,16 @@ function insertAds() {
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
     `;
+*/
+    adsContainer.innerHTML = `
+    <div id="ezoic-pub-ad-placeholder-101"></div>
+<script>
+    ezstandalone.cmd.push(function() {
+        ezstandalone.showAds(101)
+    });
+</script>
+
+    `
 
     mangaReader.appendChild(adsContainer);
 
