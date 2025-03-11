@@ -57,6 +57,10 @@ const shop = document.getElementById("shop");
 const videoContainer = document.getElementById('videoGallery');
 
 
+//Price div elements
+const priceContainer = document.getElementById("price-display");
+
+
 // State Management
 window.currentManga = null; // preserves current manga read state
 var currentChapter = null;
@@ -196,8 +200,39 @@ function openUrl(url) {
 }
 
 
-//Navigation UI settings
+export async function fetchPrice() {
+    const url = "https://free-api.vestige.fi/asset/2717482658/price";
 
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log("Price Data:", data);
+
+        // Convert price to an integer and update the div
+        const priceInt = Math.floor(data.price);
+        document.getElementById("price-display").textContent = priceInt;
+    } catch (error) {
+        console.error("Error fetching price:", error);
+        document.getElementById("price-display").textContent = "0";
+    }
+}
+
+// Fetch price on page load
+//fetchPrice();
+
+// Optionally refresh price every 30 seconds
+//setInterval(fetchPrice, 30000);
+
+
+/**
+ * Navigation UI settings 
+ * 
+ * 
+ */
 
 
 
