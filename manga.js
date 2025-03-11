@@ -421,11 +421,11 @@ export function insertAds() {
      */
 
 
-    console.log("inserting ads");
+    console.log("inserting ads -Depreciated");
     setAdsVisibility(true);
 
-    //adsense ads are depreciated
-    /** 
+    //adsense ads are depreciated until June 2025
+    /**
     adsContainer.innerHTML = `
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3900377589557710"
      crossorigin="anonymous"></script>
@@ -440,7 +440,7 @@ export function insertAds() {
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
     `;
-*/
+
     adsContainer.innerHTML = `
     <div id="ezoic-pub-ad-placeholder-101"></div>
 <script>
@@ -452,7 +452,7 @@ export function insertAds() {
     `
 
     mangaReader.appendChild(adsContainer);
-
+*/
 
 }
 
