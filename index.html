@@ -38,7 +38,8 @@
         <!-- Header -->
         <div class="title-container" onclick="renderMangaList()">
             <img src="assets/misc/coins silver.webp" alt="Logo" class="title-logo">
-            <h1>Manga++</h1>
+            <div id="price-display"></div>
+
         </div>
 
 
@@ -91,6 +92,7 @@
             </div>
         </div>
 
+        <div id="price-display"></div>
     </header>
     <!-- All Rendered Element In This Website-->
     <!-- Hidden And Shown via innerhtml and css style changes-->
@@ -99,7 +101,7 @@
             <h2>Latest Updates</h2>
         </div>
         <div id="mangaList">
-            <script> console.log("✅ Rendering Static "); </script>
+            <script> console.log("✅ Rendering Static ");  </script>
             <a href="./dist/manga/1/chapterlist.html" class="manga-card-link">
                 <div class="manga-card">
                     <img src="assets/manga/dystopia_app/cover/cover 1dd.png" alt="Dystopia-App Coverart">
@@ -139,6 +141,7 @@
     <footer>
         © 2025 InhumanityStudios. | <a href="policy.html" target="_blank" class="privacy-link">Privacy</a>
         | <a href="about.html" class="privacy-link">About</a>
+
         <br>
         <a href="https://www.youtube.com/channel/UCg9pEDKasdN5bXPhabe8Lpw" target="_blank" class="privacy-link">
             <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/youtube.svg" alt="YouTube" width="20"

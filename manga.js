@@ -202,22 +202,39 @@ function openUrl(url) {
 
 export async function fetchPrice() {
     const url = "https://free-api.vestige.fi/asset/2717482658/price";
-
+    //console.log("Container Debug: ", priceContainer);
     try {
         const response = await fetch(url);
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
-        const data = await response.json();
-        console.log("Price Data:", data);
+        console.log("✅ Prices Fetched ");
 
-        // Convert price to an integer and update the div
-        const priceInt = Math.floor(data.price);
-        document.getElementById("price-display").textContent = priceInt;
+        const data = await response.json();
+        //console.log("Price Data:", data);
+
+        // Extract and format price data to 11th decimal
+        const priceUSD = data.USD.toFixed(11);
+        const priceEUR = data.EUR.toFixed(11);
+        const priceGBP = data.GBP.toFixed(11);
+        const priceBTC = data.BTC.toFixed(11);
+        const priceAlgo = data.price.toFixed(11);
+
+        priceContainer.innerHTML = `
+            <br>
+            ALGO: ${priceAlgo}<br>
+            USD: ${priceUSD}<br>
+            EUR: ${priceEUR}<br>
+            GBP: ${priceGBP}<br>
+            BTC: ${priceBTC}
+        `;
+
+        //priceContainer.textContent = `Sud Prices: ${data}`;
     } catch (error) {
         console.error("Error fetching price:", error);
-        document.getElementById("price-display").textContent = "0";
+
+        //priceContainer.textContent = "";
     }
 }
 
@@ -889,10 +906,16 @@ window.prevPage = prevPage;
 window.renderAnimationList = renderAnimationList;
 window.playVideo = playVideo;
 
+
+window.fetchPrice = fetchPrice;
+
+// fetch price data from api 
+fetchPrice();
+
 // Load Landing page
-// SHould be rewritten as dynic funcitions for newr mangas
 renderMangaList();
 
 // Debug Browser type
 detectBrowser();
+
 
