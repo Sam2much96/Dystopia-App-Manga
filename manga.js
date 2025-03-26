@@ -209,7 +209,7 @@ export async function fetchPrice() {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
-        console.log("✅ Prices Fetched ");
+        console.log("✅ Prices Fetched   ");
 
         const data = await response.json();
         //console.log("Price Data:", data);
@@ -230,11 +230,9 @@ export async function fetchPrice() {
             BTC: ${priceBTC}
         `;
 
-        //priceContainer.textContent = `Sud Prices: ${data}`;
+
     } catch (error) {
         console.error("Error fetching price:", error);
-
-        //priceContainer.textContent = "";
     }
 }
 
