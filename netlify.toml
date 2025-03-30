@@ -19,6 +19,29 @@
   to = "/.netlify/functions/getMangaDb"
   status = 200
 
+[[redirects]]
+  from = "/api/wallet"
+  to = "/.netlify/functions/getDApp"
+  status = 200
+
+
+[[redirects]]
+  from = "/api/addwallet"
+  to = "/.netlify/functions/addWallet"
+  status = 200
+
+
+[[redirects]]
+  from = "/api/getwallet"
+  to = "/.netlify/functions/getWallet"
+  status = 200
+
+
+[[redirects]]
+  from = "/api/getallwallets"
+  to = "/.netlify/functions/getAllWallet"
+  status = 200
+
 
 [[redirects]]
   from = "/ads.txt"

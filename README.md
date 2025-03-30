@@ -239,3 +239,20 @@ Server-Side Rendering (Netlify Functions, API Calls)	Fully dynamic, no JS needed
     For SEO & Performance: Use URL-based language switching (/es/manga/...) with hreflang meta tags.
     For Simplicity: Use JSON-based translations with client-side JavaScript.
     For Image-Heavy Content: Use dynamic text overlays with Cloudinary or a Netlify Function.
+
+
+🔹 API redirects
+
+Netlify.Toml redirects api calls to the backend smartcontract getDapp,mjs
+
+
+✅ 1. Sync Netlify Environment Variables Locally
+
+Run the following command in your project directory:
+
+netlify 
+
+
+# Build And Deploy Smart Contract TO Testnet / Mainnet
+
+cd into backend/hasked time lock/ contract/projects/Contract/smart_contracts and run algokit project run build
