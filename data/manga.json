@@ -216,6 +216,47 @@
                     "public/assets/manga/dystopia_app/chap7/pg_6.webp",
                     "public/assets/manga/dystopia_app/chap7/pg_7.webp"
                 ]
+            },
+            {
+                "number": 9,
+                "title": "Artbook 2",
+                "pages": [
+                    "public/assets/manga/dystopia_app/guidebook/Aarin character sheet.webp",
+                    "public/assets/manga/dystopia_app/guidebook/Aarin inks.webp",
+                    "public/assets/manga/dystopia_app/guidebook/Aarin Sketch.webp",
+                    "public/assets/manga/dystopia_app/guidebook/Aarin sketch by cool ice.webp",
+                    "public/assets/manga/dystopia_app/guidebook/Aarin Transform.webp",
+                    "public/assets/manga/dystopia_app/guidebook/Dr Sylvannus and the Dictator Concept art.jpg",
+                    "public/assets/manga/dystopia_app/guidebook/Drones and Robots concept Art.jpg",
+                    "public/assets/manga/dystopia_app/guidebook/Eye and the Boy oracle concept art-1.jpg",
+                    "public/assets/manga/dystopia_app/guidebook/Map redesign.webp",
+                    "public/assets/manga/dystopia_app/guidebook/Maps Concept Art.webp",
+                    "public/assets/manga/dystopia_app/guidebook/Model sheet -1.jpg",
+                    "public/assets/manga/dystopia_app/guidebook/Model sheet 2.jpg",
+                    "public/assets/manga/dystopia_app/guidebook/Model sheet -3.jpg",
+                    "public/assets/manga/dystopia_app/guidebook/Model sheet -4.jpg",
+                    "public/assets/manga/dystopia_app/guidebook/Model sheet -5.jpg",
+                    "public/assets/manga/dystopia_app/guidebook/Model sheet -6.jpg",
+                    "public/assets/manga/dystopia_app/guidebook/Model sheet -7.jpg",
+                    "public/assets/manga/dystopia_app/guidebook/Nulls and the Blackhands concept art.webp",
+                    "public/assets/manga/dystopia_app/guidebook/Ogun, aganju and fishermen ninja tribe concept art.jpg",
+                    "public/assets/manga/dystopia_app/guidebook/old woman.webp",
+                    "public/assets/manga/dystopia_app/guidebook/pg 28.jpg",
+                    "public/assets/manga/dystopia_app/guidebook/promotional concept art-1.jpg",
+                    "public/assets/manga/dystopia_app/guidebook/promotional concept art-2.jpg",
+                    "public/assets/manga/dystopia_app/guidebook/promotional concept art-4.jpg",
+                    "public/assets/manga/dystopia_app/guidebook/promotional concept art-5.jpg",
+                    "public/assets/manga/dystopia_app/guidebook/Razaak 2 and Ogun Bird Concept Art-1.jpg",
+                    "public/assets/manga/dystopia_app/guidebook/Razaak, Yoma and Random Baddie concept art.jpg",
+                    "public/assets/manga/dystopia_app/guidebook/rigs 1.jpg",
+                    "public/assets/manga/dystopia_app/guidebook/rigs 2.jpg",
+                    "public/assets/manga/dystopia_app/guidebook/rigs 3.jpg",
+                    "public/assets/manga/dystopia_app/guidebook/The worlogog and Bandits Concept Art.jpg",
+                    "public/assets/manga/dystopia_app/guidebook/Uncle Osas Concept art.jpg",
+                    "public/assets/manga/dystopia_app/guidebook/Veronica Osaro, Nmoru and Malcom Eni concept art-2.jpg",
+                    "public/assets/manga/dystopia_app/guidebook/weapons concept art.jpg",
+                    "public/assets/manga/dystopia_app/guidebook/Yoma Reference pic.webp"
+                ]
             }
         ],
         "genre": [
