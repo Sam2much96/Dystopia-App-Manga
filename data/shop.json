@@ -2,21 +2,29 @@
     {
         "name": "Cool Artwork",
         "description": "Character Concept Art.",
-        "image": "assets/manga/dystopia_app/cover/pg 25.jpg"
+        "image": "../assets/merch/merch 1.jpg",
+        "id" : 0,
+        "price": 25
     },
     {
         "name": "Game Wallpaper",
         "description": "An exclusive wallpaper from our game.",
-        "image": "assets/manga/dystopia_app/cover/cover 1dd.png"
+        "image": "../assets/merch/merch 2.jpg",
+        "id" : 1,
+        "price": 25
     },
     {
         "name": "Manga Cover",
         "description": "A cover from our latest manga release.",
-        "image": "assets/manga/dystopia_app/cover/cover 2.jpg"
+        "image": "../assets/merch/merch 3.jpg",
+        "id" : 2,
+        "price": 25
     },
     {
         "name": "Character Concept",
         "description": "Character concept art.",
-        "image": "assets/manga/dystopia_app/cover/shot 100.jpg"
+        "image": "../assets/merch/merch 4.png",
+        "id" : 3,
+        "price": 25
     }
 ]

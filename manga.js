@@ -28,8 +28,6 @@
  */
 
 
-
-
 const dB_Remote = false; // dynamic vs static loading switch dependent on database size/ remote database fetching
 
 
@@ -51,7 +49,7 @@ const carousel = document.querySelector(".carousel");
 const wiki = document.getElementById('wiki');
 const games = document.getElementById('games');
 const whitepaper = document.getElementById('whitepaper');
-const shop = document.getElementById("shop");
+//const shop = document.getElementById("shop");
 
 //Video Div Elements
 const videoContainer = document.getElementById('videoGallery');
@@ -199,7 +197,7 @@ function openUrl(url) {
     window.open(url, "_blank");
 }
 
-
+/** 
 export async function fetchPrice() {
     const url = "https://free-api.vestige.fi/asset/2717482658/price";
     //console.log("Container Debug: ", priceContainer);
@@ -236,6 +234,7 @@ export async function fetchPrice() {
     }
 }
 
+*/
 // Fetch price on page load
 //fetchPrice();
 
@@ -243,45 +242,6 @@ export async function fetchPrice() {
 //setInterval(fetchPrice, 30000);
 
 
-/**
- * Navigation UI settings 
- * 
- * 
- */
-
-
-
-export function renderShop() {
-    //renders character bio from character bio.txt
-    console.log("Rendering Shop");
-
-    setMangaListVisibility(false);
-    setChapterListVisibility(false);
-    setMangaReaderVisibility(false);
-    setGamesListVisibility(false);
-    setCarouselVisibility(true);
-    setWhitePaperVisibility(false);
-    setShopVisibility(true);
-    setWiKiVisibility(false);
-    setAnimeVisibility(false);
-
-    shop.innerHTML = `    
-    <h1>Shop</h1>
-    <div class="shop-items">
-        ${window.shopItems.map(item => `
-            <div class="shop-item">
-                <img src="${item.image}" alt="${item.name}">
-                <h2>${item.name}</h2>
-                <p>${item.description}</p>
-                <a href="${item.image}" download="${item.name}.jpg" class="download-btn">
-                    Download
-                </a>
-            </div>
-        `).join('')}
-    </div>
-
-    `
-}
 
 export function renderWhitePaperRoadMap() {
     // show the whitepaper / roadmap
@@ -328,9 +288,9 @@ export function renderWhitePaperRoadMap() {
                     <li>✅ Q4 2024 - Android Platform Beta Launch</li>
                     <li>🚀 Q1 2025 - Web Plaform Alpha & $SUD Token Launch</li>
                     <li>📈 Q2 2025 - New Features Integration ( Digital Marketplace & Onchain Save states)</li>
-                    <li>🌎 Q3 2025 - Community Engagement & User Acquisition Campaign</li>
-                    <li>🚀 Q4 2025 - Steam Plaform Alpha Launch</li>
-                    <li>🚀 Q1 2026 - Nintendo Switch Plaform Alpha Launch</li>
+                    <li>🌎 Q4 2025 - Community Engagement & User Acquisition Campaign</li>
+                    <li>🚀 Q1 2026 - Steam Plaform Alpha Launch</li>
+                    <li>🚀 Q2 2026 - Nintendo Switch Plaform Alpha Launch</li>
                 </ul>
             </div>
         </div>
@@ -874,13 +834,7 @@ export function renderWiKi() {
 }
 
 
-// Function to open the video in an iframe
-export function playVideo(url) {
-    //document.getElementById("videoPlayer").innerHTML = `
-    //<iframe width="560" height="315" src="${url}" frameborder="0" allowfullscreen></iframe>
-    //`;
 
-}
 
 // Load Database from json
 await loadAnimationDb();
@@ -894,7 +848,6 @@ await loadCharacterBio();
 // Attach functions to `window` to make them available in the global scope
 window.renderGamesList = renderGamesList;
 window.renderMangaList = renderMangaList;
-window.renderShop = renderShop;
 window.renderWhitePaperRoadMap = renderWhitePaperRoadMap;
 window.renderWiKi = renderWiKi;
 window.showReader = showReader;
@@ -902,13 +855,14 @@ window.showChapters = showChapters;
 window.nextPage = nextPage;
 window.prevPage = prevPage;
 window.renderAnimationList = renderAnimationList;
-window.playVideo = playVideo;
 
 
-window.fetchPrice = fetchPrice;
+
+//window.fetchPrice = fetchPrice;
 
 // fetch price data from api 
-fetchPrice();
+// update api to use version 2
+//fetchPrice();
 
 // Load Landing page
 renderMangaList();

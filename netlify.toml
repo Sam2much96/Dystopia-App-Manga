@@ -2,6 +2,12 @@
   functions = "netlify/functions"
   command = "npm run generate"  # Runs generate scripts before deployment for static pages & sitemap generation
 
+
+[dev]
+  functions = "netlify/functions"
+  framework = "#static"
+  port = 3000
+
 [[redirects]]
   from = "/manga/chapter-:chapter"
   to = "/.netlify/functions/renderPage?chapter=:chapter"
@@ -20,10 +26,8 @@
   status = 200
 
 [[redirects]]
-  from = "/api/wallet"
-  to = "/.netlify/functions/getDApp"
-  status = 200
-
+  from = "/api/create-checkout-session"
+  to = "/.netlify/functions/stripe"
 
 [[redirects]]
   from = "/api/addwallet"
@@ -32,16 +36,15 @@
 
 
 [[redirects]]
-  from = "/api/getwallet"
-  to = "/.netlify/functions/getWallet"
-  status = 200
-
-
-[[redirects]]
   from = "/api/getallwallets"
   to = "/.netlify/functions/getAllWallet"
   status = 200
 
+
+[[redirects]]  
+  from = "/shop" # shortens shop url
+  to = "/shop/shop.html"
+  status = 200
 
 [[redirects]]
   from = "/ads.txt"
