@@ -329,6 +329,7 @@ pre {
     min-width: 320px;
   }
 
+
   .sr-header__logo {
     background-position: center;
   }
@@ -372,6 +373,11 @@ pre {
   text-align: center;
   margin-top: 20px;
 }
+
+.pasha-image:hover {
+    transform: scale(1.02);
+}
+
 
 .pasha-image img {
   opacity: 1;

@@ -28,6 +28,8 @@
 [[redirects]]
   from = "/api/create-checkout-session"
   to = "/.netlify/functions/stripe"
+  force = true
+  status = 200
 
 [[redirects]]
   from = "/api/addwallet"
@@ -41,10 +43,6 @@
   status = 200
 
 
-[[redirects]]  
-  from = "/shop" # shortens shop url
-  to = "/shop/shop.html"
-  status = 200
 
 [[redirects]]
   from = "/ads.txt"

@@ -443,3 +443,7 @@ iframe {
     max-width: 560px;
     height: 315px;
 }
+
+.crossed {
+  text-decoration: line-through;
+}

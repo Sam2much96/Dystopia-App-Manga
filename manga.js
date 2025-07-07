@@ -155,14 +155,7 @@ function setAdsVisibility(isVisible) {
 
 
 
-function setShopVisibility(isVisible) {
-    // toggles the visibility of the games list
-    if (isVisible == true) {
-        shop.classList.remove("hidden"); // Show the carousel
-    } else {
-        shop.classList.add("hidden"); // Hide the carousel
-    }
-}
+
 
 function setWiKiVisibility(isVisible) {
     {
@@ -254,7 +247,6 @@ export function renderWhitePaperRoadMap() {
     setGamesListVisibility(false);
     setCarouselVisibility(true);
     setWhitePaperVisibility(true);
-    setShopVisibility(false);
     setWiKiVisibility(false);
     setAnimeVisibility(false);
 
@@ -365,7 +357,6 @@ export function showChapters(manga) {
     setChapterListVisibility(true);
     setMangaReaderVisibility(false);
     setWhitePaperVisibility(false);
-    setShopVisibility(false);
     setWiKiVisibility(false);
     setAnimeVisibility(false);
 
@@ -407,7 +398,6 @@ export function showReader(chapterNumber) {
     setChapterListVisibility(false);
     setMangaReaderVisibility(true);
     setWiKiVisibility(false);
-    setShopVisibility(false);
     setAnimeVisibility(false);
 
     // make the manga reader full screen
@@ -559,7 +549,6 @@ export function renderGamesList() {
     setWhitePaperVisibility(false);
     setGamesListVisibility(true);
     setCarouselVisibility(true);
-    setShopVisibility(false);
     setWiKiVisibility(false);
     setAnimeVisibility(false);
     //console.log(games.style.display);
@@ -686,31 +675,6 @@ async function loadGameCollection() {
 }
 
 
-async function loadShopItems() {
-
-    if (window.shopItems == null) {
-
-        // Load Remote Database
-
-        try {
-            const response = await fetch("/data/shop.json"); // Adjust path if necessary
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            const data = await response.json(); // Parse JSON
-
-            window.shopItems = data;
-            console.log(`✅ Loaded Shop Database 1`); // Check if the data loads correctly
-
-        } catch (error) {
-            console.error("Error loading manga collection:", error);
-        }
-
-    }
-
-}
-
-
 
 async function loadAnimationDb() {
 
@@ -755,7 +719,6 @@ export function renderMangaList() {
     setGamesListVisibility(false);
     setWhitePaperVisibility(false);
     setCarouselVisibility(true);
-    setShopVisibility(false);
     setWiKiVisibility(false);
     setAnimeVisibility(false);
 
@@ -791,7 +754,6 @@ export function renderAnimationList() {
     setGamesListVisibility(false);
     setWhitePaperVisibility(false);
     setCarouselVisibility(true);
-    setShopVisibility(false);
     setWiKiVisibility(false);
     setAnimeVisibility(true);
     // creates a video card for each element in the animation database
@@ -827,7 +789,6 @@ export function renderWiKi() {
     setGamesListVisibility(false);
     setWhitePaperVisibility(false);
     setCarouselVisibility(true);
-    setShopVisibility(false);
     setWiKiVisibility(true);
     setAnimeVisibility(false);
     wiki.innerText = window.wiki;
@@ -840,7 +801,6 @@ export function renderWiKi() {
 await loadAnimationDb();
 await loadMangaCollection(); // disabled if favour of static page rendering refactor
 await loadGameCollection();
-await loadShopItems();
 await loadCharacterBio();
 
 

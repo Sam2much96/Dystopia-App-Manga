@@ -8,24 +8,51 @@
 */
 
 // to do:
-// (1) 
-// 
-// (3) Connect to frontend
-// (4) Deconstruct api call to include payment parameters for the shop frontend
+// (1) Add shop item images  
+// (2)
+// (3) Connect to frontend (done)
+// (4) Deconstruct api call to include payment parameters for the shop frontend (done)
+
+
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY, {apiVersion: '2020-08-27'});
 
 export default async function handler(request) {
+  console.log(process.env.STRIPE_SECRET_KEY);
+    
+  if (request.method !== 'POST') { // error catcher for non post requests
+      console.log("form debug: ", request.body);
+      return new Response('Method Not Allowed', { status: 405 });
+    }
   
-  // to do : 
-  // (1) Map to different endpoit states, like checkout,
+    //fetch all product details from the shop db
+    const filePath = join(process.cwd(), "data", "../data/shop.json");
+    const rawData = readFileSync(filePath, "utf-8"); // Read raw JSON as string
+    const shopData = JSON.parse(rawData); // now it’s an array
+    
+
     const domainURL = process.env.DOMAIN;
-    console.log("Domain Url debug: ", domainURL);
+    //console.log("Domain Url debug: ", domainURL);
+
+
     try {
 
-    //Create a stripe session for this item at this amount to be paid in stripe secure checkout
+      // Parse the request body
+      const bodyText = await request.text();
+      const formData = new URLSearchParams(bodyText);
+     
+      const quantity = parseInt(formData.get('quantity'), 10) || 1;
+      const itemId = formData.get('itemId');
+      // for debug purposes only
+      //console.log("quantity: ", quantity,"/ item id: ", itemId);
+      //console.log('shopData:', shopData);
+      //console.log('isArray:', Array.isArray(shopData));
+      const item = shopData.find(i => i.id === 0);
+      
+      //console.log("shop item: ",item);
 
-    
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       mode: 'payment',
@@ -33,11 +60,12 @@ export default async function handler(request) {
         price_data: {
           currency: 'usd',
           product_data: {
-            name: 'Cool Item',
+            name: item.name,
+            description : item.description,
           },
-          unit_amount: 5000,
+          unit_amount: item.price,
         },
-        quantity: 1,
+        quantity: quantity,
       }],
       success_url: `${domainURL}/shop/success.html?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${domainURL}/shop/canceled.html`,
