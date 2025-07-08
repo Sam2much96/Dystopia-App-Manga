@@ -26,6 +26,12 @@
   status = 200
 
 [[redirects]]
+  from = "/api/shop"
+  to = "/.netlify/functions/getShopDb"
+  status = 200
+
+
+[[redirects]]
   from = "/api/create-checkout-session"
   to = "/.netlify/functions/stripe"
   force = true

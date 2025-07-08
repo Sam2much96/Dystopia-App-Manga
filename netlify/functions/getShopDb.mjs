@@ -1,4 +1,4 @@
-// Netlify Serverless FUnction for securely fetching manga database data from the backend
+// Netlify Serverless FUnction for securely fetching shop database data from the backend
 //  
 //  
 import { readFileSync } from 'node:fs';
@@ -8,7 +8,7 @@ export default async function handler() {
 
 
     try {
-        const filePath = join(process.cwd(), "data", "../data/manga.json");
+        const filePath = join(process.cwd(), "data", "../data/shop.json");
         const jsonData = readFileSync(filePath, "utf-8"); // Read raw JSON as string
 
         return new Response(jsonData, {

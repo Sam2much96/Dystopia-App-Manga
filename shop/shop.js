@@ -23,20 +23,26 @@ Features:
 // load shop items with db call
 async function loadShopItems() {
 
-    if (window.shopItems == null) {
+    var shopJson = sessionStorage.getItem('products');
+
+    if (!shopJson && !window.shopItems) {
+
+        console.log("debug 1: ",shopJson);
+        console.log("debug 2: ", window.shopItems);
 
         // Load Remote Database
-        // to do : (1) simplify shop json data to api database call
+        // to do : (1) simplify shop json data to api database call (done)
+        // check if the session alrady has the shop products data cached
 
         try {
-            const response = await fetch("/data/shop.json"); // Adjust path if necessary // to do: fetch data using api code
+            const response = await fetch("/api/shop"); // Adjust path if necessary // to do: fetch data using api code
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             const data = await response.json(); // Parse JSON
-
+            shopJson = data;
             window.shopItems = data;
-            console.log(`✅ Loaded Shop Database 1`, data); // Check if the data loads correctly
+            console.log(`✅ Loaded Shop Database 1`); // Check if the data loads correctly
 
             //save data base data to local storage for checkout page usage
             sessionStorage.setItem('products', JSON.stringify(data));
@@ -47,6 +53,12 @@ async function loadShopItems() {
         }
 
     }
+    if (shopJson && !window.shopItems ) {
+        window.shopItems = JSON.parse(shopJson); // parse shop db back to json
+        console.log(`✅ Loaded Shop Database 2`)
+    }
+
+    
 
 }
 
@@ -81,81 +93,6 @@ export function renderShop() {
     </div>
     `
     
-    // the buy quantity form + UI
-    
-    /** 
-    `<!-- api call to serverless stripe backend api + forms to submit purchase data-->
-        <form action="/api/create-checkout-session" method="POST">
-                  <!-- quantity setter UI-->
-                    <div class="quantity-setter">
-                    <button class="increment-btn" id="subtract" disabled type="button">-</button>
-                    <input 
-                        type="number" 
-                        id="quantity-input" 
-                        min="1" value="1" 
-                        name="quantity" 
-                    />
-                    <button class="increment-btn" id="add" type="button">+</button>
-                    </div>
-                    <p class="sr-legal-text">Number of copies (max 10)</p>
-
-                    <button type="submit" id="submit">Buy</button>
-                </form>`
-    */
-  // The max and min number of photos a customer can purchase
-    //var MIN_PHOTOS = 1;
-    //var MAX_PHOTOS = 10;
-
-    // changes the buy inout quantity
-    //var quantityInput = document.getElementById('quantity-input');
-
-    //console.log("quantity input debug: ", quantityInput);
-
-    // bug :  doesn't work for all items
-    //quantityInput.addEventListener('change', function (e) {
-        // Ensure customers only buy between 1 and 10 photos
-    //    if (quantityInput.value < MIN_PHOTOS) {
-    //        quantityInput.value = MIN_PHOTOS;
-    //    }
-    //    if (quantityInput.value > MAX_PHOTOS) {
-    //        quantityInput.value = MAX_PHOTOS;
-    //    }
-   // });
-
-
-    /* Method for changing the product quantity when a customer clicks the increment / decrement buttons */
-
-    // get the add button ui element
-    //var addBtn = document.getElementById("add");
-    //var subtractBtn = document.getElementById("subtract");
-
-    // lambda function for the shop item increase & decrease ui button
-    //var updateQuantity = function (evt) {
-    //if (evt && evt.type === 'keypress' && evt.keyCode !== 13) {
-    //    return;
-    //}
-    //var delta = evt && evt.target.id === 'add' && 1 || -1;
-
-    //addBtn.disabled = false;
-    //subtractBtn.disabled = false;
-
-    // Update number input with new value.
-    //quantityInput.value = parseInt(quantityInput.value) + delta;
-
-    // Disable the button if the customers hits the max or min
-    //if (quantityInput.value == MIN_PHOTOS) {
-    //    subtractBtn.disabled = true;
-    //}
-    //if (quantityInput.value == MAX_PHOTOS) {
-    //    addBtn.disabled = true;
-    //}
-    //};
-
-
-    // add click event ui event listener to button click
-    //addBtn.addEventListener('click', updateQuantity);
-    //subtractBtn.addEventListener('click', updateQuantity);
-
 
 
 }

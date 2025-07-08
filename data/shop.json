@@ -1,7 +1,7 @@
 [
     {
         "name": "Cool Artwork",
-        "description": "Character Concept Art.",
+        "description": "Men's Roundneck anime Tshirt. Yellow",
         "image": "../assets/merch/merch 1.jpg",
         "id" : 0,
         "price": 5000,
@@ -19,7 +19,7 @@
     },
     {
         "name": "Manga Cover",
-        "description": "A cover from our latest manga release.",
+        "description": "White Roundneck Men's Tshirt with chapter 2 manga release.",
         "image": "../assets/merch/merch 3.jpg",
         "id" : 2,
         "price": 5000,

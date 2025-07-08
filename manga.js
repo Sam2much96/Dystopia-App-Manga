@@ -28,7 +28,6 @@
  */
 
 
-const dB_Remote = false; // dynamic vs static loading switch dependent on database size/ remote database fetching
 
 
 // Get Div Elements from the DOM as constants
@@ -594,39 +593,42 @@ function prevPage() {
 
 async function loadMangaCollection() {
 
-    if (dB_Remote && window.mangaCollection == null) {
-        // Load Remote Database Data Slower
-        try {
-            const response = await fetch("/data/manga.json"); // Adjust path if necessary
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            const data = await response.json(); // Parse JSON
-            window.mangaCollection = data
+    // check if data collection has previously been saved in the session
+    // this fetches the product json database from the store landing page without propagating unnecessay api calls
+    const mangaJson = sessionStorage.getItem('manga');
+    var manga = null;
+    // to do : (1) use the item id and the presaved database to render a checking page that serialises to the UI form for the object
+    // to do : (2) verify test transaction registers on website
 
-            console.log(`✅ Loaded Manga Database 1`); // Check if the data loads correctly
-        } catch (error) {
-            console.error("Error loading manga collection:", error);
-        }
-    }
+    if (mangaJson) {
+        const manga = JSON.parse(mangaJson); // works. THank God!
 
-    if (!dB_Remote && window.mangaCollection == null) {
+        window.mangaCollection = manga;
+
+        console.log(`✅ Loaded Manga Database 1: `); // Check if the data loads correctly
+    } else {
+        // Fallback: redirect back or fetch again if needed
+        console.error("No data found in sessionStorage");
+        
+
         // Load Local database securely, slower with some processing and cache
-
         // read local database for faster load times and lower network requirements
-        const response = await fetch("/.netlify/functions/getMangaDb"); // Adjust path if necessary
+        const response = await fetch("/api/manga"); 
         if (!response.ok) {
+            
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
+
         const data = await response.json(); // Parse JSON
         //console.log(data); // Check if data is correctly fetched
 
-        // Store it in mangaCollection
-
+        // Store it in mangaCollection globals and to the page's session
         window.mangaCollection = data;
+        sessionStorage.setItem('manga', JSON.stringify(data));
 
         console.log(`✅ Loaded Manga Database 2`); // Check if the data loads correctly
     }
+
 
 }
 
@@ -721,6 +723,8 @@ export function renderMangaList() {
     setCarouselVisibility(true);
     setWiKiVisibility(false);
     setAnimeVisibility(false);
+
+    //console.log("manga db debug: ", window.mangaCollection);
 
     //creates a Manga Card div for each element in the Manga Collection Constant
     window.mangaCollection.forEach(manga => {
