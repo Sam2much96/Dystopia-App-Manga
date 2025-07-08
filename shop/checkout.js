@@ -1,6 +1,6 @@
 const params = new URLSearchParams(window.location.search);
-const item = params.get('item'); // 'John'
-//const age = params.get('age');   // '25'
+const item = params.get('item'); // fetch item params for the checkout from the url 
+
 
 // to do: map to selected item id, fetch addtional data from shop database api, create checkout shop styling
 console.log("page checkout parameters: ",item);
@@ -15,7 +15,10 @@ if (productsJson) {
   const products = JSON.parse(productsJson); // works. THank God!
 
   window.shopItems = products;
-  console.log("database debug : ", products);
+  
+  //console.log("database debug : ", products);
+  console.log("✅ Loaded Shop Db from session");
+
 } else {
   // Fallback: redirect back or fetch again if needed
   console.error("No data found in sessionStorage");
@@ -23,19 +26,20 @@ if (productsJson) {
 }
 
 var shop = document.getElementById("shop");
-var item_ = window.shopItems[item];
+var userItem = window.shopItems[item];
 
-console.log("shop debug: ", shop);
+//console.log("shop debug: ", shop); // works
 //console.log("Item debug: ",item_); // works
 
+// render the item page
 shop.innerHTML = `<div class="shop-items">
-            <a href='./checkout.html?item=${item_.id}'>
             <div class="pasha-image">
-                <img src="${item_.image}" alt="${item_.name}" width="240" height="240">                
-                <p>${item_.description}</p>
+                <img src="${userItem.image}" alt="${userItem.name}" width="240" height="240">                
+                <p>${userItem.description}</p>
                 <!-- convert cent price to dollar price-->
-                <h2>US $${(item_.new/100).toFixed(2)}</h2>
-                <h4 class="crossed">US $${(item_.price/100).toFixed(2)}</h4> <h3> -${item_.discount}% off </h3>
+                <h2>US $${(userItem.new/100).toFixed(2)}</h2>
+                <h4 class="crossed">US $${(userItem.price/100).toFixed(2)}</h4> 
+                <h3> -${userItem.discount}% off </h3>
             </div>
             </a>
     </div>`;
@@ -69,7 +73,7 @@ shop.innerHTML = `<div class="shop-items">
     // changes the buy inout quantity
     var quantityInput = document.getElementById('quantity-input');
 
-    console.log("quantity input debug: ", quantityInput);
+    // console.log("quantity input debug: ", quantityInput);
 
     // bug :  doesn't work for all items
     quantityInput.addEventListener('change', function (e) {
