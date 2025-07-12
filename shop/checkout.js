@@ -1,3 +1,11 @@
+/**
+ * 
+ * to do:
+ * 
+ * (1) Link reviews panel to chat subsystem backend
+ * (2) Connect Reviews Render implmentation to Chat database backend
+ */
+
 const params = new URLSearchParams(window.location.search);
 const item = params.get('item'); // fetch item params for the checkout from the url 
 
@@ -25,17 +33,47 @@ if (productsJson) {
   // window.location.href = '/';
 }
 
-var shop = document.getElementById("shop");
+// The max and min number of photos a customer can purchase
+var MIN_PHOTOS = 1;
+var MAX_PHOTOS = 10;
+
+// changes the buy inout quantity
+var quantityInput = document.getElementById('quantity-input');
+
+var descriptionPanel = document.getElementById("description-panel");
+var imageSlider = document.getElementsByClassName("image-slider")[0];//document.getElementById("image-slider");
+var reviewsPanel = document.getElementById("reviews-panel");
+
+// get the add button ui element
+// for the disabled checkout ui / serverless backend api call
+var addBtn = document.getElementById("add");
+var subtractBtn = document.getElementById("subtract");
+
 var userItem = window.shopItems[item];
 
-//console.log("shop debug: ", shop); // works
-//console.log("Item debug: ",item_); // works
+//console.log("slider debug: ", imageSlider); // works
+//console.log("Item debug: ",userItem); // works
 
-// render the item page
-shop.innerHTML = `<div class="shop-items">
-            <div class="pasha-image">
-                <img src="${userItem.image}" alt="${userItem.name}" width="240" height="240">                
-                <p>${userItem.description}</p>
+
+
+
+// render the item's thumbnails
+imageSlider.innerHTML =`
+              <img id="main-image" src=${userItem.image} alt="Product">  
+                <!-- Thumbnails -->
+                <div class="thumbnails">
+                <img src=${userItem.thumbnail_1} alt="" data-src=${userItem.thumbnail_1}>
+                <img src=${userItem.thumbnail_2} alt="" data-src=${userItem.thumbnail_2}>
+                <img src=${userItem.thumbnail_3} alt="" data-src=${userItem.thumbnail_3}>
+                <img src=${userItem.thumbnail_4} alt="" data-src=${userItem.thumbnail_4}>
+                </div>
+
+`;
+
+// render the item page description
+descriptionPanel.innerHTML = `
+<h2>Description</h2>
+<p>${userItem.description}</p>
                 <!-- convert cent price to dollar price-->
                 <h2>US $${(userItem.new/100).toFixed(2)}</h2>
                 <h4 class="crossed">US $${(userItem.price/100).toFixed(2)}</h4> 
@@ -44,57 +82,45 @@ shop.innerHTML = `<div class="shop-items">
             </a>
     </div>`;
 
-
-    // the buy quantity form + UI
-    
-    /** 
-    `<!-- api call to serverless stripe backend api + forms to submit purchase data-->
-        <form action="/api/create-checkout-session" method="POST">
-                  <!-- quantity setter UI-->
-                    <div class="quantity-setter">
-                    <button class="increment-btn" id="subtract" disabled type="button">-</button>
-                    <input 
-                        type="number" 
-                        id="quantity-input" 
-                        min="1" value="1" 
-                        name="quantity" 
-                    />
-                    <button class="increment-btn" id="add" type="button">+</button>
-                    </div>
-                    <p class="sr-legal-text">Number of copies (max 10)</p>
-
-                    <button type="submit" id="submit">Buy</button>
-                </form>`
-    */
-  // The max and min number of photos a customer can purchase
-    var MIN_PHOTOS = 1;
-    var MAX_PHOTOS = 10;
-
-    // changes the buy inout quantity
-    var quantityInput = document.getElementById('quantity-input');
-
-    // console.log("quantity input debug: ", quantityInput);
-
-    // bug :  doesn't work for all items
-    quantityInput.addEventListener('change', function (e) {
-        // Ensure customers only buy between 1 and 10 photos
-        if (quantityInput.value < MIN_PHOTOS) {
-            quantityInput.value = MIN_PHOTOS;
-        }
-        if (quantityInput.value > MAX_PHOTOS) {
-            quantityInput.value = MAX_PHOTOS;
-        }
-    });
+// renders the checkout reviews
+// temporarily disabled
+// to do : (1) connect reviews to backend db
+//reviewsPanel.innerHTML = `
+//<h2>Reviews</h2>
+//<div class="review">
+//<strong>John Doe</strong>
+//<p>Great product!</p>
+//</div>
+//<div class="review">
+//<strong>Jane Smith</strong>
+//<p>Loved it. Would buy again.</p>
+//</div>
+//`;    
 
 
-    /* Method for changing the product quantity when a customer clicks the increment / decrement buttons */
+// console.log("quantity input debug: ", quantityInput);
 
-    // get the add button ui element
-    var addBtn = document.getElementById("add");
-    var subtractBtn = document.getElementById("subtract");
+// bug :  doesn't work for all items
+quantityInput.addEventListener('change', function (e) {
+      // Ensure customers only buy between 1 and 10 photos
+      if (quantityInput.value < MIN_PHOTOS) {
+          quantityInput.value = MIN_PHOTOS;
+      }
+      if (quantityInput.value > MAX_PHOTOS) {
+          quantityInput.value = MAX_PHOTOS;
+      }
+});
 
-    // lambda function for the shop item increase & decrease ui button
-    var updateQuantity = function (evt) {
+
+/* Checkout Form UI Logic
+* Method for changing the product quantity 
+* when a customer clicks the increment / decrement buttons 
+*/
+
+
+
+// lambda function for the shop item increase & decrease ui button
+var updateQuantity = function (evt) {
     if (evt && evt.type === 'keypress' && evt.keyCode !== 13) {
         return;
     }
@@ -113,9 +139,54 @@ shop.innerHTML = `<div class="shop-items">
     if (quantityInput.value == MAX_PHOTOS) {
         addBtn.disabled = true;
     }
-    };
+};
 
 
-    // add click event ui event listener to button click
-    addBtn.addEventListener('click', updateQuantity);
-    subtractBtn.addEventListener('click', updateQuantity);
+// add click event ui event listener to button click
+addBtn.addEventListener('click', updateQuantity);
+subtractBtn.addEventListener('click', updateQuantity);
+
+
+// shop page thumbnail 
+const mainImage = document.getElementById('main-image');
+const thumbnails = document.querySelectorAll('.thumbnails img');
+
+thumbnails.forEach(thumb => {
+  thumb.addEventListener('click', () => {
+    const src = thumb.getAttribute('data-src');
+    mainImage.setAttribute('src', src);
+  });
+});
+
+// connect buy button to item's stripe product url
+// possibly until the serverless api is properly audited 12 Jul 2025
+
+document.getElementById("submit").addEventListener("click", () => { // works
+  // Replace with your desired URL:
+  //const paymentUrl = "https://buy.stripe.com/test_ABC123XYZ456";
+
+  console.log("opening url: ", userItem.buy_stripe);
+  window.location.href = userItem.buy_stripe;
+});
+
+/**
+ * Redundant Depreciated code
+ * 
+ * // checkout form to api
+ * <form action="/api/create-checkout-session" method="POST">
+                  <!-- quantity setter UI-->
+                    <div class="quantity-setter">
+                    <button class="increment-btn" id="subtract" disabled type="button">-</button>
+                    <input 
+                        type="number" 
+                        id="quantity-input" 
+                        min="1" value="1" 
+                        name="quantity" 
+                    />
+                    <button class="increment-btn" id="add" type="button">+</button>
+                    </div>
+                    <p class="sr-legal-text">Number of copies (max 10)</p>
+
+                    <button type="submit" id="submit">Buy</button>
+          </form>`
+ */

@@ -18,14 +18,35 @@
   </head>
 
   <body>
+    <header>
+        
+    </header>
       <!-- to do : render the checkout page with 4 imgs anf the checkout form -->
     <div class="sr-root">
       <div>
+        <!-- The shop Div --> 
+            <div class="product-page">
+
+            <!-- Image slider -->
+            <div id="image-slider" class="image-slider">
+                <!-- main image -->
+            </div>
+
+            
+
+            <!-- Item description -->
+            <div id="description-panel" class="description-panel">
+            </div>
+
+            <!-- Item reviews -->
+            <div id="reviews-panel" class="reviews-panel">
+            </div>
+
+            </div>
+        
+        <!-- checkout section UI -->
+         <!-- Disabling form for auditing backend apo impl-->
         <section class="container">
-          <!-- The shop Div -->
-            <div id="shop"></div>  
-                    
-          <form action="/api/create-checkout-session" method="POST">
                   <!-- quantity setter UI-->
                     <div class="quantity-setter">
                     <button class="increment-btn" id="subtract" disabled type="button">-</button>
@@ -39,8 +60,7 @@
                     </div>
                     <p class="sr-legal-text">Number of copies (max 10)</p>
 
-                    <button type="submit" id="submit">Buy</button>
-                </form>`  
+                    <button type="submit" id="submit">Buy</button>            
         </section>
 
         <div id="error-message"></div>

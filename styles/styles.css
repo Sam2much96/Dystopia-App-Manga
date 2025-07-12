@@ -1,7 +1,7 @@
 :root {
     --primary-color: #5d5d5d;
     --secondary-color: #f3f4f6;
-    --text-color: #cd2929;
+    --text-color: #1c1c1c;
     --accent-color: #ef4444;
 }
 
@@ -444,6 +444,55 @@ iframe {
     height: 315px;
 }
 
+/* styling for crossed texts */
 .crossed {
   text-decoration: line-through;
+}
+
+/*Styling for the shop products checkout page*/
+.product-page {
+  max-width: 800px;
+  margin: auto;
+  font-family: Arial, sans-serif;
+}
+
+.image-slider {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.image-slider img {
+  max-width: 100%;
+  border-radius: 6px;
+    
+  box-shadow: 0 7px 14px 0 rgba(50, 50, 93, 0.1),
+  0 3px 6px 0 rgba(0, 0, 0, 0.07);
+  transition: all 0.8s ease;
+  background-color: var(--gray-border);
+
+}
+
+.thumbnails {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.thumbnails img {
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.thumbnails img:hover {
+  border-color: #e02e24;
+}
+
+.description-panel, .reviews-panel {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-top: 20px;
+  border-radius: 6px;
 }
