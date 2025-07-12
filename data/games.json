@@ -3,7 +3,7 @@
         "id": 1,
         "title": "Dystopia App",
         "description": "YOu are a Fourth Worlder, Survive!",
-        "coverImage": "assets/manga/dystopia_app/cover/R9_00024.webp",
+        "coverImage": "public/assets/manga/dystopia_app/cover/R9_00024.webp",
         "url": "https://dystopia-app.store",
         "likes": 500,
         "genre": [

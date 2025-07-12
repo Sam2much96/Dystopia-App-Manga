@@ -752,6 +752,7 @@ export function renderMangaList() {
 export function renderAnimationList() {
     console.log("render anime list triggered");
 
+    // this code bloc is being refactored to instead open a url to the playlist in the animation db
     setMangaListVisibility(false);
     setChapterListVisibility(false);
     setMangaReaderVisibility(false);
@@ -761,6 +762,13 @@ export function renderAnimationList() {
     setWiKiVisibility(false);
     setAnimeVisibility(true);
     // creates a video card for each element in the animation database
+    // to do:
+    // (1) create static image thumbnail for all the hosted videos in anime db
+    // (2) link each static image to the url programmatically
+
+    // debug the window anime db
+    //console.log("window anime dbg: ", window.anime);
+
     window.anime.forEach(video => {
 
         const videoCard = document.createElement('div');
