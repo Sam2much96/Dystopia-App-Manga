@@ -4,6 +4,7 @@
  * 
  * (1) Link reviews panel to chat subsystem backend
  * (2) Connect Reviews Render implmentation to Chat database backend
+ * (3) Scale checkout image size down on stripe for faster load times
  */
 
 const params = new URLSearchParams(window.location.search);
@@ -162,11 +163,12 @@ thumbnails.forEach(thumb => {
 // possibly until the serverless api is properly audited 12 Jul 2025
 
 document.getElementById("submit").addEventListener("click", () => { // works
-  // Replace with your desired URL:
-  //const paymentUrl = "https://buy.stripe.com/test_ABC123XYZ456";
+    // connect the buy button to stripe either test or main
+    // use stripe_test for testing in test mode or sandbox mode
 
-  console.log("opening url: ", userItem.buy_stripe);
-  window.location.href = userItem.buy_stripe;
+    console.log("opening url: ", userItem.stripe_buy);
+    window.location.href = userItem.stripe_buy;
+
 });
 
 /**

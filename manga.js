@@ -25,6 +25,7 @@
  * 
  * Bugs:
  * (1) Using static pages clears the global window state reloading the database from scratch whenever on the landing page
+ * (2) window.wiki is tet to a html element instead of a string text
  */
 
 
@@ -60,6 +61,7 @@ const priceContainer = document.getElementById("price-display");
 
 // State Management
 window.currentManga = null; // preserves current manga read state
+window.wiki = null;
 var currentChapter = null;
 var currentPageIndex = 0;
 
@@ -278,7 +280,7 @@ export function renderWhitePaperRoadMap() {
                 <ul class="roadmap-list">
                     <li>✅ Q4 2024 - Android Platform Beta Launch</li>
                     <li>🚀 Q1 2025 - Web Plaform Alpha & $SUD Token Launch</li>
-                    <li>📈 Q2 2025 - New Features Integration ( Digital Marketplace & Onchain Save states)</li>
+                    <li>📈 Q3 2025 - New Features Integration ( Digital Marketplace & Onchain Save states)</li>
                     <li>🌎 Q4 2025 - Community Engagement & User Acquisition Campaign</li>
                     <li>🚀 Q1 2026 - Steam Plaform Alpha Launch</li>
                     <li>🚀 Q2 2026 - Nintendo Switch Plaform Alpha Launch</li>
@@ -634,14 +636,19 @@ async function loadMangaCollection() {
 
 
 async function loadCharacterBio() {
-
+    // bug: (1) some other object sets window.wiki before this function, i need to find out which
+    // (2) wiki data is a text and should be proper formatted into a html page
+    
+    //console.log("Loading character wiki: ", window.wiki);
     if (window.wiki == null) {
         try {
+            // to do : (1) depreciate text format in favour of html formatted data
             const response = await fetch("/data/Dystopia characters bio.txt"); // Path to your text file
             if (!response.ok) {
                 throw new Error("Failed to load text file");
             }
             window.wiki = await response.text(); // Convert response to text
+            //console.log("wiki debug 1: ", window.wiki);
             console.log(`✅ Loaded Characters Database`);
 
         } catch (error) {
@@ -803,6 +810,11 @@ export function renderWiKi() {
     setCarouselVisibility(true);
     setWiKiVisibility(true);
     setAnimeVisibility(false);
+
+    //  debug the wiki text
+    // window.wiki is improperly loaded
+    //console.log("wiki debug: ", window.wiki );
+    
     wiki.innerText = window.wiki;
 }
 

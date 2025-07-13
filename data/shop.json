@@ -11,7 +11,8 @@
         "price": 5000,
         "new": 2499,
         "discount": 50,
-        "buy_stripe": "https://buy.stripe.com/test_5kQ00i114dF7aFe3Cg28800" 
+        "stripe_test": "https://buy.stripe.com/test_5kQ00i114dF7aFe3Cg28800",
+        "stripe_buy": "https://buy.stripe.com/cNiaEWbwnd9GaxI80T6oo01"
     },
     {
         "name": "Roundneck White Tshirt",
@@ -25,7 +26,8 @@
         "price": 5000,
         "new": 2499,
         "discount": 50,
-        "buy_stripe": "https://buy.stripe.com/test_00w00i7psdF74gQ1u828801"
+        "stripe_test": "https://buy.stripe.com/test_00w00i7psdF74gQ1u828801",
+        "stripe_buy": "https://buy.stripe.com/9B65kCgQH5HefS2eph6oo02"
     },
     {
         "name": "Cool Anime Wall Poster",
@@ -39,6 +41,7 @@
         "price": 5000,
         "new" : 2500,
         "discount": 50,
-        "buy_stripe": "https://buy.stripe.com/test_4gM9AS4dg8kN4gQfkY28802"
+        "stripe_test": "https://buy.stripe.com/test_4gM9AS4dg8kN4gQfkY28802",
+        "stripe_buy": "https://buy.stripe.com/cNicN40RJglS6hs6WP6oo03"
     }
 ]
