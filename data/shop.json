@@ -16,11 +16,11 @@
     {
         "name": "Roundneck White Tshirt",
         "description": "High Quality Men's Roundneck White T-shirt.",
-        "image": "../assets/merch/merch_3.jpg",
+        "image": "../assets/merch/merch_4.png",
         "thumbnail_1": "../assets/merch/merch_3.jpg",
-        "thumbnail_2": "../assets/merch/merch_2.jpg",
-        "thumbnail_3": "../assets/merch/merch_1.jpg",
-        "thumbnail_4": "../assets/merch/merch _4.png",
+        "thumbnail_2": "../assets/merch/merch_4.png",
+        "thumbnail_3": "../assets/merch/merch_3.jpg",
+        "thumbnail_4": "../assets/merch/merch_4.png",
         "id" : 1,
         "price": 5000,
         "new": 2499,
@@ -28,31 +28,17 @@
         "buy_stripe": "https://buy.stripe.com/test_00w00i7psdF74gQ1u828801"
     },
     {
-        "name": "Cool Wall Poster",
-        "description": "Cool Dystopia Anime Canvas .",
-        "image": "../assets/merch/merch_3.jpg",
-        "thumbnail_1": "",
-        "thumbnail_2": "",
-        "thumbnail_3": "",
-        "thumbnail_4": "",
+        "name": "Cool Anime Wall Poster",
+        "description": "Cool Anime Wall Canvas size A3.",
+        "image": "../assets/merch/Poster_1.jpg",
+        "thumbnail_1": "../assets/merch/Poster_2.jpg",
+        "thumbnail_2": "../assets/merch/Poster_3.jpg",
+        "thumbnail_3": "../assets/merch/Poster_4.jpg",
+        "thumbnail_4": "../assets/merch/Poster_2.jpg",
         "id" : 2,
-        "price": 2003,
+        "price": 5000,
         "new" : 2500,
         "discount": 50,
-        "buy_stripe": ""
-    },
-    {
-        "name": "Character Concept",
-        "description": "Character concept art.",
-        "image": "../assets/merch/merch_4.png",
-        "thumbnail_1": "",
-        "thumbnail_2": "",
-        "thumbnail_3": "",
-        "thumbnail_4": "",
-        "id" : 3,
-        "price": 5000,
-        "new": 2499,
-        "discount":50,
-        "buy_stripe": ""
+        "buy_stripe": "https://buy.stripe.com/test_4gM9AS4dg8kN4gQfkY28802"
     }
 ]
