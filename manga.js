@@ -814,8 +814,19 @@ export function renderWiKi() {
     //  debug the wiki text
     // window.wiki is improperly loaded
     //console.log("wiki debug: ", window.wiki );
-    
-    wiki.innerText = window.wiki;
+    // fetch the html page from a redirect
+    fetch('wiki')
+    .then(response => response.text())
+    .then(html => {
+        wiki.innerHTML = html;
+    })
+    .catch(error => {
+        console.error('Error loading wiki.html:', error);
+        wiki.innerText = 'Failed to load wiki content.';
+    });
+
+
+    //wiki.innerText = window.wiki;
 }
 
 

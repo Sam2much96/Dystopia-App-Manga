@@ -30,6 +30,10 @@
   to = "/.netlify/functions/getShopDb"
   status = 200
 
+[[redirects]]
+from = "/wiki"
+to = "/dist/wiki/wiki"
+status = 200
 
 [[redirects]]
   from = "/api/create-checkout-session"
