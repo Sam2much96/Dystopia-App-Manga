@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Shop++</title>
+    <!-- to do: (1) copy aliexpress ui from figma to here -->
+     <!-- (2) -->
+
+    <link rel="icon" href="../../favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../../styles/normalize.css" />
+    <link rel="stylesheet" href="../../styles/global.css" />
+    <link rel="stylesheet" href="../../styles/styles.css" />
+    
+    
+
+  </head>
+
+  <body>
+    <header>
+        
+    </header>
+      <!-- to do : render the checkout page with 4 imgs anf the checkout form -->
+    <div class="sr-root">
+      <div>
+        <!-- The shop Div --> 
+            <div class="product-page">
+
+            <!-- Image slider -->
+            <div id="image-slider" class="image-slider">
+                <!-- main image -->
+            </div>
+
+            
+
+            <!-- Item description -->
+            <div id="description-panel" class="description-panel">
+            </div>
+
+            <!-- Item reviews -->
+            <div id="reviews-panel" class="reviews-panel">
+            </div>
+
+            </div>
+        
+        <!-- checkout section UI -->
+         <!-- Disabling form for auditing backend apo impl-->
+        <section class="container">
+                  <!-- quantity setter UI-->
+                    <div class="quantity-setter">
+                    <button class="increment-btn" id="subtract" disabled type="button">-</button>
+                    <input 
+                        type="number" 
+                        id="quantity-input" 
+                        min="1" value="1" 
+                        name="quantity" 
+                    />
+                    <button class="increment-btn" id="add" type="button">+</button>
+                    </div>
+                    <p class="sr-legal-text">Number of copies (max 10)</p>
+
+                    <button type="submit" id="submit">Buy</button>            
+        </section>
+
+        <div id="error-message"></div>
+      </div>
+    </div>
+  </body>
+    <script type="module" async src="checkout.js"></script>
+
+</html>
