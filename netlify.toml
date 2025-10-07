@@ -48,8 +48,8 @@ status = 200
 
 
 [[redirects]]
-  from = "/api/getallwallets"
-  to = "/.netlify/functions/getAllWallet"
+  from = "/api/admin"
+  to = "/.netlify/functions/getAdminWallet"
   status = 200
 
 
