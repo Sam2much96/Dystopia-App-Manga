@@ -11,6 +11,7 @@
  * (4) fix firebase auth for this backend
  * (5) add admin api key encrytion on the client end and decryption on the server end
  * (6) expand firebase api logic into this admin api endpoint
+ * (7) fetch firebase data to synchronize player ingame coins data with the hot wallet holding amounts
  */
 
 
@@ -41,7 +42,7 @@ const algodServer = chain+'-api.algonode.xyz'; // uses nodely free api, docs: ht
 const algodPort = "";
 
 // Asset ID
-const assetID = 2717482658; // replace with actual ASA ID
+const assetID = "2717482658"; // replace with actual ASA ID
 
 //create algorand client
 const algodClient = new algosdk.Algodv2(algodToken, algodServer, algodPort);
@@ -64,11 +65,7 @@ export default async function handler(request) {
             throw new Error("ADMIN_MNEMONIC not found in environment variables");
         }
 
-
-
         status();
-        //const status = await algodClient.status().do();
-        //console.log(status);
         
         // Return the public address
         let account = algosdk.mnemonicToSecretKey(mnemonic);
@@ -77,17 +74,24 @@ export default async function handler(request) {
         // Check account balance ---
         let accountInfo = await algodClient.accountInformation(account.addr).do();
 
-        // Find ASA in account’s assets list
-        let assetHolding = accountInfo.assets.find(a => a["asset-id"] === assetID);
-        
-        let amount = 0;
-        if (assetHolding) {
-        amount = assetHolding.amount; // raw integer amount (respect decimals)
-        }
+        // for local debug purposes only
         //console.log(accountInfo);
 
+        // Find the asset in the list
+        const asset = accountInfo.assets.find(a => a.assetId === BigInt(assetID));
+
+
+        // Convert to human-readable string safely
+        let algoAmount = Number(accountInfo.amount) / 1e6;
+
+
+
         //json resonse
-            return new Response(JSON.stringify({ admin_account: ` ${account.addr}`, balance: `${accountInfo.amount} Algos` , ASA_id : assetID, ASA_amount: amount}), {
+            return new Response(JSON.stringify({ 
+                admin_account: ` ${account.addr}`, 
+                balance: `${algoAmount} Algos` , 
+                ASA_id : asset.assetId.toString(), 
+                ASA_amount: asset.amount.toString()}), {
             status: 200,
             headers: { "Content-Type": "application/json" },
         });
@@ -118,6 +122,7 @@ async function status() {
     // check algorand node connection
     // bug:
     // (1) node connection api does not account for the device region and so might break in production depending on the region
+    // (2) Bugs once then works a second time then bugs a third time. very buggy implementatin for the algod client node
     try {
             const status = await algodClient.status().do();
             //console.log("Connected to Algorand node. Last round:", status["last-round"]);
@@ -188,3 +193,26 @@ async function optIn(receiver){
 
 
 //}
+
+async function burn(amt_to_burn){
+    const amountToBurn = amt_to_burn;
+    const burnAddress = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAY5HFKQ";
+
+    let params = await suggestedParams();
+
+    // Construct asset transfer transaction to burn address
+    const burnTxn = algosdk.makeAssetTransferTxnWithSuggestedParamsFromObject({
+      from: account.addr,
+      to: burnAddress,
+      amount: amountToBurn,
+      assetIndex: assetID,
+      suggestedParams: params,
+      note: new Uint8Array(Buffer.from(`Burn ${amountToBurn} transaction`)),
+    });
+
+    // Sign transaction
+    const signedTxn = burnTxn.signTxn(account.sk);
+
+    //return the signed transaction for submission to the chain
+    return signedTxn;
+}
