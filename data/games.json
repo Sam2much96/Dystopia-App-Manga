@@ -1,38 +1,38 @@
 [
-    {
-        "id": 1,
-        "title": "Dystopia App",
-        "description": "YOu are a Fourth Worlder, Survive!",
-        "coverImage": "public/assets/manga/dystopia_app/cover/R9_00024.webp",
-        "url": "https://dystopia-app.store",
-        "likes": 500,
-        "genre": [
-            "Action",
-            "RPG"
-        ]
-    },
-    {
-        "id": 2,
-        "title": "Cuboids",
-        "description": "Life as a 2D Cube in a 3D Cuboid World",
-        "coverImage": "assets/games/cuboid.png",
-        "url": "https://inhumanity-arts.itch.io/cuboids",
-        "likes": 140,
-        "genre": [
-            "HyperCasual",
-            "Point & Click"
-        ]
-    },
-    {
-        "id": 3,
-        "title": "Tapping Bird",
-        "description": "An intersellar flappy bird game!",
-        "coverImage": "assets/games/tappingBird.png",
-        "url": "https://inhumanity-arts.itch.io/tapping-bird",
-        "likes": 186,
-        "genre": [
-            "casual",
-            "Point & Click"
-        ]
-    }
+  {
+    "id": 1,
+    "title": "Dystopia App",
+    "description": "YOu are a Fourth Worlder, Survive!",
+    "coverImage": "public/assets/manga/dystopia_app/cover/R9_00024.webp",
+    "url": "https://dystopia-app.store",
+    "likes": 500,
+    "genre": ["Action", "RPG"]
+  },
+  {
+    "id": 2,
+    "title": "Cars vs Angels",
+    "description": "Life as a 2D Cube in a 3D Cuboid World",
+    "coverImage": "assets/games/carsVsAliens.png",
+    "url": "https://inhumanity-arts.itch.io/cars-vs-angels",
+    "likes": 340,
+    "genre": ["Racing", "RPG"]
+  },
+  {
+    "id": 3,
+    "title": "Tapping Bird",
+    "description": "An intersellar flappy bird game!",
+    "coverImage": "assets/games/tappingBird.png",
+    "url": "https://inhumanity-arts.itch.io/tapping-bird",
+    "likes": 186,
+    "genre": ["casual", "Point & Click"]
+  },
+  {
+    "id": 4,
+    "title": "Cuboids",
+    "description": "Life as a 2D Cube in a 3D Cuboid World",
+    "coverImage": "assets/games/cuboid.png",
+    "url": "https://inhumanity-arts.itch.io/cuboids",
+    "likes": 186,
+    "genre": ["HyperCasual", "Point & Click"]
+  }
 ]

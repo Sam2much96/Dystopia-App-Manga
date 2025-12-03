@@ -3,6 +3,7 @@
  * 
  * Features:
  * (1) test the admin hot wallet configuration
+ * (2) shows the hot wallet account details, address, asa and algos
  * 
  * To Do:
  * (1) expose all core algosdk features to a single class exported via netlify serverless api
