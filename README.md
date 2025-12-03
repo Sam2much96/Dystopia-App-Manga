@@ -271,3 +271,5 @@ cd into backend/hasked time lock/ contract/projects/Contract/smart_contracts and
 (1) Add blog posts to reach word count treshhold
 (2) Add .svg pages for manga translations
 (3) Manga font is called CC's wild words roman
+(4) update site to be more stylish
+(5) add new comic contents
